@@ -154,9 +154,7 @@ public class RoboticonQuest extends Game {
 			case 6:
 				currentEvent = eventGenerator.chooseEvent();
 				currentEvent.activate(playerList.get(currentPlayer));
-				System.out.print(currentEvent + "\n");
 				if(currentEvent != null) {
-					System.out.print(currentEvent.getEventDescription() + "\n");
 					RandomEventScreen screen = new RandomEventScreen(this, currentEvent);
 					setScreen(screen);
 				}
