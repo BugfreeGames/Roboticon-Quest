@@ -1,3 +1,7 @@
+/*
+    <url>
+    This class is new for assessment 3.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;

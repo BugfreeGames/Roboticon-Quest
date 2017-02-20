@@ -84,7 +84,7 @@ public class AnimationAddResources implements IAnimation {
 	}
 
 	// Time length for the animation in second.
-	private static final float animationLength = 3;
+	private static final float animationLength = 2;
 
 	/**
 	 * Render call.
