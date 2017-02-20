@@ -28,12 +28,12 @@ class TileEvent implements RandomEvent {
             };
     public static String[][] TEMPLATESTRINGS =
             {
-                    {"Meteor Shower", "Meteors have landed on one of your tiles. It now will produce more Ore when mined."},
-                    {"Solar Flare", "A Solar Flare is affecting one of your tiles. It will now produce more Energy."},
-                    {"Enriched Soil", "The soil in one of your tiles has been enriched; it will now produce more Food."},
-                    {"Land of interest", "Our Scientists underestimated a tile in your colony; its production in all 3 resources has increased by 1."},
-                    {"Valuable Land", "Our Scientists underestimated a tile in your colony; its production in all 3 resources has increased by 2."},
-                    {"Ancient Civilisation", "The remains of an advanced civilisation has been discovered on one of your tiles. Its production values have dramatically increased from their knowledge."}
+                    {"Meteor Shower", "Meteors have landed on one of your tiles.\n It now will produce more Ore when mined."},
+                    {"Solar Flare", "A Solar Flare is affecting one of your tiles.\n It will now produce more Energy."},
+                    {"Enriched Soil", "The soil in one of your tiles has been enriched;\n it will now produce more Food."},
+                    {"Land of interest", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 1."},
+                    {"Valuable Land", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 2."},
+                    {"Ancient Civilisation", "The remains of an advanced civilisation has been\n discovered on one of your tiles. Its production values have \ndramatically increased from their knowledge."}
             };
 
     /**
@@ -77,9 +77,12 @@ class TileEvent implements RandomEvent {
         return eventName;
     }
 
+<<<<<<< HEAD
     /**
      * Get method for description
      * @return  eventName   - Description of event taking place
      */
+=======
+>>>>>>> ac85cadf33e2d372f2f6ec9781c6c1c5b1b6d9c3
     public String getEventDescription() { return description; }
 }

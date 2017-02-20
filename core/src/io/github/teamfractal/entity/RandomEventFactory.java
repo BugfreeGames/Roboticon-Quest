@@ -11,7 +11,7 @@ import java.util.Random;
  */
 
 public class RandomEventFactory {
-    public static final int EVENTCHANCE = 100;      // Percentage chance of event occurring each round 0-100
+    public static final int EVENTCHANCE = 15;      // Percentage chance of event occurring each round 0-100
     private Random rand = new Random();
 
     public RandomEventFactory() {
@@ -35,7 +35,7 @@ public class RandomEventFactory {
                     return createRoboticonEvent();
             }
         }
-        return new NoEvent();
+        return null;
     }
 
     /**

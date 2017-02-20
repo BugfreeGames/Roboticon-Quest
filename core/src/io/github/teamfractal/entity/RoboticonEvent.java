@@ -27,9 +27,9 @@ class RoboticonEvent implements RandomEvent {
             };
     public static String[][] TEMPLATESTRINGS =
             {
-                    {"Diamond Drill", "Diamond-plated drill technology has been salvaged from scrap, and one of your Roboticons have been upgraded. It now produces more Ore."},
-                    {"Efficient Energy Core", "One of your Roboticons has been upgraded with an efficient energy core. It now produces more Energy."},
-                    {"Advanced Harvesting", "One of your Roboticons has self-learnt more advanced harvesting techniques. It now produces more Food."},
+                    {"Diamond Drill", "Diamond-plated drill technology has been salvaged from scrap,\n and one of your Roboticons have been upgraded.\n It now produces more Ore."},
+                    {"Efficient Energy Core", "One of your Roboticons has been upgraded with an efficient energy core.\n It now produces more Energy."},
+                    {"Advanced Harvesting", "One of your Roboticons has self-learnt more advanced harvesting techniques.\n It now produces more Food."},
             };
 
     /**
