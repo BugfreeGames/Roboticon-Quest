@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Changed test values to be in line with revised figures
+	- Removed testProduceResources
+ */
+
 package io.github.teamfractal.entity;
 
 import static org.junit.Assert.*;

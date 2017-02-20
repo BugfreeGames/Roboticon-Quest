@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+    Changes made:
+    - Added support for food in the case statement.
+    - Added show/hide functionality to the Next button
+ */
+
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;

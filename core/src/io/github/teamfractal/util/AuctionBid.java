@@ -1,3 +1,7 @@
+/*
+    This class is new for assessment 3.
+ */
+
 package io.github.teamfractal.util;
 
 import io.github.teamfractal.entity.Player;

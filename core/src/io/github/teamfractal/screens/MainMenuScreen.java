@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+    Changes made:
+    - Removed redundant import statements.
+    - Replaced HomeMainMenu with MainMenuActors.
+ */
+
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;

@@ -1,5 +1,9 @@
 /*
-	<TODO URL>
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes Made:
+	- Replaced literals with constants.
+	- Implementing Supply/Demand based market by adding getCurvePoint and by modifying the getBuyPrice method
+	- Added produceRoboticons to generate roboticons
  */
 package io.github.teamfractal.entity;
 

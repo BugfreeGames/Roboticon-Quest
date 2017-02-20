@@ -1,5 +1,5 @@
 /*
-	<TODO URL>
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
 	This class has received large changes focused on making the layout of the Roboticon purchase screen more
 	user-friendly.
  */

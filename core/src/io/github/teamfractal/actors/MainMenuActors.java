@@ -1,8 +1,8 @@
 /*
-	<TODO URL>
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
 	Changes Made:
 	- Changed listener on new game button to point to the new game screen.
-
+	- Changed title image file path to point to new image.
  */
 package io.github.teamfractal.actors;
 

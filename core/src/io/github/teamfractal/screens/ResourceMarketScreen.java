@@ -1,3 +1,9 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Modified constructor to create a market screen.
+	- Added prepare() function.
+ */
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;

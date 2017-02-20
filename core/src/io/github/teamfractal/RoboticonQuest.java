@@ -1,4 +1,5 @@
 /*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
 	Changes made:
 	- Added RandomEvent functionality
 	- Removed redundant variable landBoughtThisTurn
@@ -156,9 +157,9 @@ public class RoboticonQuest extends Game {
 			// End phase - Clean up and move to next player.
 			case 6:
 				currentEvent = eventGenerator.chooseEvent();
-				currentEvent.activate(playerList.get(currentPlayer));
 				System.out.print(currentEvent + "\n");
 				if(currentEvent != null) {
+					currentEvent.activate(playerList.get(currentPlayer));
 					System.out.print(currentEvent.getEventDescription() + "\n");
 					RandomEventScreen screen = new RandomEventScreen(this, currentEvent);
 					setScreen(screen);

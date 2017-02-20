@@ -1,6 +1,8 @@
 /*
-	<TODO URL>
-	The only changes to this file have been the removal of redundant methods.
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Removal of redundant methods.
+	- Replaced numeric literals with constants.
  */
 package io.github.teamfractal.entity;
 

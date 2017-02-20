@@ -1,5 +1,5 @@
 /*
-	TODO: URL
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
 	This is a new class to implement the auction system.
 	Changes Made:
 	- Removed redundant imports.

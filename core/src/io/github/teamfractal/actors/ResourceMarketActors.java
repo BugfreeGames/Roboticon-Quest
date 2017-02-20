@@ -1,7 +1,12 @@
 /*
-	<TODO URL>
-	This class has had its layout changed, but remains mostly the same as the previous team wrote it.
- */
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added a market screen to constructor
+	- Added a return button to return to market screen
+	- Changed 'Gold' to 'Credits'
+	- The screen produced by the class has had its layout changed.
+	- Added player stats to the screen.
+*/
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
