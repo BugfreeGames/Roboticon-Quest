@@ -42,7 +42,6 @@ public class PlayerTest {
 		market.setOre(16);
 		player.setMoney(1000);
 
-
 		int playerMoney = player.getMoney();
 		int orePrice = market.getSellPrice(ResourceType.ORE);
 		//Purchase 5 ore
