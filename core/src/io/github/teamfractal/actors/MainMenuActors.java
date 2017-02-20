@@ -1,7 +1,8 @@
 /*
 	<TODO URL>
-	The only change to this file was the change to the file path for the image on the splash screen, which is a new
-	image based on the previous teams banner.
+	Changes Made:
+	- Changed listener on new game button to point to the new game screen.
+
  */
 package io.github.teamfractal.actors;
 

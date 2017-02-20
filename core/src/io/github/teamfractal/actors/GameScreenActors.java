@@ -1,8 +1,11 @@
 /*
 	<TODO URL>
 	This class has been altered for assessment 3.
-		Removed logic for finding the winning player, moved from this class to the RoboticonQuest class.
 		Cleaned up redundant code.
+		Changed Roboticons list to an ArrayList.
+		Removed restriction on purchasing a single plot of land per turn.
+		Added Food to plot status text.
+		Added capability of hiding/showing the next button
  */
 package io.github.teamfractal.actors;
 

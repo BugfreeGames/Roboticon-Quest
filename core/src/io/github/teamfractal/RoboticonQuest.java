@@ -1,3 +1,10 @@
+/*
+	Changes made:
+	- Added RandomEvent functionality
+	- Removed redundant variable landBoughtThisTurn
+	- Removed redundant method getInstance
+	-
+ */
 package io.github.teamfractal;
 
 import java.util.ArrayList;
@@ -25,9 +32,6 @@ import io.github.teamfractal.util.PlotManager;
  */
 public class RoboticonQuest extends Game {
 	static RoboticonQuest _instance;
-	public static RoboticonQuest getInstance() {
-		return _instance;
-	}
 
 	private PlotManager plotManager;
 	SpriteBatch batch;
@@ -40,7 +44,6 @@ public class RoboticonQuest extends Game {
 	private int currentPlayer;
 	public ArrayList<Player> playerList;
 	public Market market;
-	private int landBoughtThisTurn;
 	private RandomEvent currentEvent;
 	private RandomEventFactory eventGenerator;
 	public Auction auction;

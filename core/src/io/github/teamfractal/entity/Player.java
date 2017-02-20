@@ -1,3 +1,9 @@
+/*
+	Changes made:
+	- Changed Array<Roboticon> to ArrayList<Roboticon> for consistency in types
+	- Removed redundant import statements
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.RoboticonQuest;
@@ -10,10 +16,8 @@ import io.github.teamfractal.exception.NotCommonResourceException;
 import io.github.teamfractal.exception.NotEnoughResourceException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
+
 
 import com.badlogic.gdx.utils.Array;
 
