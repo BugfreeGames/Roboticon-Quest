@@ -13,6 +13,8 @@ import io.github.teamfractal.animation.AnimationPhaseTimeout;
 import io.github.teamfractal.animation.AnimationShowPlayer;
 import io.github.teamfractal.animation.IAnimationFinish;
 import io.github.teamfractal.screens.*;
+import io.github.teamfractal.entity.RandomEventFactory;
+import io.github.teamfractal.entity.RandomEvent;
 import io.github.teamfractal.entity.Market;
 import io.github.teamfractal.entity.Player;
 import io.github.teamfractal.util.PlotManager;
@@ -39,7 +41,8 @@ public class RoboticonQuest extends Game {
 	public ArrayList<Player> playerList;
 	public Market market;
 	private int landBoughtThisTurn;
-	
+	private RandomEvent currentEvent;
+	private RandomEventFactory eventGenerator;
 	public Auction auction;
 
 	public int getPlayerIndex (Player player) {
@@ -106,6 +109,7 @@ public class RoboticonQuest extends Game {
 		this.currentPlayer = 0;
 		this.market = new Market();
 		plotManager = new PlotManager();
+		eventGenerator = new RandomEventFactory();
 	}
 
 	public void nextPhase () {
@@ -148,6 +152,9 @@ public class RoboticonQuest extends Game {
 			// End phase - Clean up and move to next player.
 			case 6:
 				this.nextPlayer();
+				// Choose and implement random event for the new player
+				currentEvent = eventGenerator.chooseEvent();
+				currentEvent.activate(playerList.get(currentPlayer));
 				break;
 
 			// Phase 1: Enable purchase of a LandPlot

@@ -25,7 +25,7 @@ public class Player {
 	private int food = 0;
 	private String name;
 	ArrayList<LandPlot> landList = new ArrayList<LandPlot>();
-	Array<Roboticon> roboticonList;
+	ArrayList<Roboticon> roboticonList;
 	private RoboticonQuest game;
 	private static final int TILE_COST = 10;
 
@@ -33,6 +33,8 @@ public class Player {
 	public int getOre() { return ore; }
 	public int getEnergy() { return energy; }
 	public int getFood() { return food; }
+	public ArrayList<LandPlot> getLand() { return landList; }
+		
 	public String getName() { return name; }
 
 	public Player(RoboticonQuest game, String name){
@@ -373,7 +375,7 @@ public class Player {
 		roboticonAmountList.add("Uncustomised x "    + uncustomised);
 		return roboticonAmountList;
 	}
-	public Array<Roboticon> getRoboticons(){
+	public ArrayList<Roboticon> getRoboticons(){
 		return this.roboticonList;
 	}
 
