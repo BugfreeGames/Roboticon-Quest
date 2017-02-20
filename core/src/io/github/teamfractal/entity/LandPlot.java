@@ -133,6 +133,19 @@ public class LandPlot {
 	}
 
 	/**
+	 * Calculate the amount of resources to be produced.
+	 *
+	 * @return The amount of resources to be produced in an 2D array.
+	 */
+	public int[] produceResources() {
+		int[] produced = new int[3];
+		for (int i = 0; i < 2; i++) {
+			produced[i] = productionAmounts[i] + productionModifiers[i];
+		}
+		return produced;
+	}
+
+	/**
 	 * Calculate the amount of resources to be produced for specific resource.
 	 * @param resource  The resource type to be calculated.
 	 * @return          Calculated amount of resource to be generated.
@@ -146,7 +159,7 @@ public class LandPlot {
 
 	public int getResource(ResourceType resource) {
 		int resIndex = resourceTypeToIndex(resource);
-		return productionAmounts[resIndex];
+		return productionAmounts[resIndex] + productionModifiers[resIndex];
 	}
 	
 	public boolean hasRoboticon(){

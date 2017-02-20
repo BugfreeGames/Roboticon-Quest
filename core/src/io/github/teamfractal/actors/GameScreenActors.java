@@ -25,6 +25,8 @@ import io.github.teamfractal.screens.AbstractAnimationScreen;
 import io.github.teamfractal.screens.GameScreen;
 import io.github.teamfractal.util.TileConverter;
 
+import java.util.ArrayList;
+
 public class GameScreenActors {
 	private final Stage stage;
 	private RoboticonQuest game;
@@ -172,7 +174,7 @@ public class GameScreenActors {
 						ResourceType type;
 						int selection = installRoboticonSelect.getSelectedIndex();
 
-						Array<Roboticon> roboticons = game.getPlayer().getRoboticons();
+						ArrayList<Roboticon> roboticons = game.getPlayer().getRoboticons();
 						switch (selection) {
 							case 0:
 								type = ResourceType.ORE;
