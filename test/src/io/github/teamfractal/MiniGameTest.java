@@ -8,10 +8,8 @@ import static org.junit.Assert.assertEquals;
 public class MiniGameTest {
 
 	private MiniGame miniGame;
-
-	/**
-	 * Reset market to its default status.
-	 */
+	private final int MINI_GAME_WIN_AMOUNT = 600;
+	
 	@Before
 	public void Contractor() {
 		miniGame = new MiniGame();
@@ -19,8 +17,8 @@ public class MiniGameTest {
 	}
 
 	@Test
-	public void minGameShouldShowBooleanIfWinningTheGame() {
-		// assertEquals(true, miniGame.WinGame(3));
+	public void getPriceTest() {
 		assertEquals(0, miniGame.getPrice(false));
+		assertEquals(MINI_GAME_WIN_AMOUNT, miniGame.getPrice(true));
 	}
 }

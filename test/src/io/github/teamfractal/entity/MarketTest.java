@@ -56,21 +56,6 @@ public class MarketTest {
 	}
 
 	/**
-	 * test: getBuyPrice()
-	 * The market should start with correct price for player to buy.
-	 * The price is 90% of the sell price.
-	 * This could change in later development.
-	 */
-	@Test
-	public void marketShouldHaveCorrectPricesForResources() throws Exception {
-		assertEquals(9, market.getBuyPrice(ResourceType.ORE));
-		assertEquals(18, market.getBuyPrice(ResourceType.ENERGY));
-		assertEquals(27, market.getBuyPrice(ResourceType.FOOD));
-		assertEquals(36, market.getBuyPrice(ResourceType.ROBOTICON));
-	}
-
-
-	/**
 	 * test: hasEnoughResources
 	 * player class can use this method to find out that the amount of resource
 	 * player want to buy is available in the market, if the amount of resource
@@ -90,20 +75,6 @@ public class MarketTest {
 	/**
 	 * test: getSellPrice()
 	 */
-
-	@Test
-	public void marketShouldReturnCorrectSellPrice(){
-		int valueToTest1 = 20;
-		market.setEnergy(valueToTest1);
-		market.setOre(valueToTest1);
-		market.setFood(valueToTest1);
-		market.setRoboticon(valueToTest1);
-
-		assertEquals(30,market.getSellPrice(ResourceType.FOOD));
-		assertEquals(10,market.getSellPrice(ResourceType.ORE));
-		assertEquals(40,market.getSellPrice(ResourceType.ROBOTICON));
-		assertEquals(20,market.getSellPrice(ResourceType.ENERGY));
-	}
 
 	@Test
 	public void marketShouldReduceResourcesWhenSells(){
