@@ -23,9 +23,7 @@ public class RandomEventScreen implements Screen {
         this.stage = new Stage(new ScreenViewport());
         this.table = new Table();
         table.setFillParent(true);
-
-        stage.setDebugAll(true);
-
+        
         eventActors = new RandomEventActors(game, this, event); // generates actors for the screen
         table.add(eventActors);
         stage.addActor(table);
