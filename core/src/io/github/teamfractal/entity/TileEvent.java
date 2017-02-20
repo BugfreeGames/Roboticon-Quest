@@ -17,24 +17,22 @@ class TileEvent implements RandomEvent {
     public String eventName;
     public String description;
     private int[] tileModifiers = new int[3];
-    public static int[][] TEMPLATEVALS =
-            {
-                    {1, 0, 0},
-                    {0, 1, 0},
-                    {0, 0, 1},
-                    {1, 1, 1},
-                    {2, 2, 2},
-                    {5, 5, 5}
-            };
-    public static String[][] TEMPLATESTRINGS =
-            {
-                    {"Meteor Shower", "Meteors have landed on one of your tiles.\n It now will produce more Ore when mined."},
-                    {"Solar Flare", "A Solar Flare is affecting one of your tiles.\n It will now produce more Energy."},
-                    {"Enriched Soil", "The soil in one of your tiles has been enriched;\n it will now produce more Food."},
-                    {"Land of interest", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 1."},
-                    {"Valuable Land", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 2."},
-                    {"Ancient Civilisation", "The remains of an advanced civilisation has been\n discovered on one of your tiles. Its production values have \ndramatically increased from their knowledge."}
-            };
+    public static int[][] TEMPLATEVALS = {
+            {1, 0, 0},
+            {0, 1, 0},
+            {0, 0, 1},
+            {1, 1, 1},
+            {2, 2, 2},
+            {5, 5, 5}
+    };
+    public static String[][] TEMPLATESTRINGS = {
+            {"Meteor Shower", "Meteors have landed on one of your tiles.\n It now will produce more Ore when mined."},
+            {"Solar Flare", "A Solar Flare is affecting one of your tiles.\n It will now produce more Energy."},
+            {"Enriched Soil", "The soil in one of your tiles has been enriched;\n it will now produce more Food."},
+            {"Land of interest", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 1."},
+            {"Valuable Land", "Our Scientists underestimated a tile in your colony;\n its production in all 3 resources has increased by 2."},
+            {"Ancient Civilisation", "The remains of an advanced civilisation has been\n discovered on one of your tiles. Its production values have \ndramatically increased from their knowledge."}
+    };
 
     /**
      * Constructor for the TileEvent class
@@ -77,12 +75,9 @@ class TileEvent implements RandomEvent {
         return eventName;
     }
 
-<<<<<<< HEAD
     /**
      * Get method for description
      * @return  eventName   - Description of event taking place
      */
-=======
->>>>>>> ac85cadf33e2d372f2f6ec9781c6c1c5b1b6d9c3
     public String getEventDescription() { return description; }
 }
