@@ -1,3 +1,8 @@
+/*
+    TODO: URL
+    This class is new for assessment 3.
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.entity.enums.ResourceType;
@@ -27,12 +32,22 @@ class RoboticonEvent implements RandomEvent {
                     {"Advanced Harvesting", "One of your Roboticons has self-learnt more advanced harvesting techniques. It now produces more Food."},
             };
 
+    /**
+     * Constructor for RoboticonEvent Class
+     * @param customisation     - ResourceType of the required customisation.
+     * @param eventName         - Name of the event
+     * @param description       - Description of the event
+     */
     public RoboticonEvent(ResourceType customisation, String eventName, String description) {
         this.customisation = customisation;
         this.eventName = eventName;
         this.description = description;
     }
 
+    /**
+     * Implements the random event by changing values in a Roboticon with no upgrades.
+     * @param player    - The Player that the event is happening to
+     */
     public void activate(Player player) {
         ArrayList<Roboticon> playerRoboticons = player.getRoboticons();
         if (playerRoboticons.size() <= 0) {
@@ -50,8 +65,18 @@ class RoboticonEvent implements RandomEvent {
             roboticon.setCustomisation(customisation);
         }
     }
+
+    /**
+     * Get method for eventName
+     * @return  eventName   - Name of event taking place
+     */
     public String getEventName() {
         return eventName;
     }
+
+    /**
+     * Get method for description
+     * @return  eventName   - Description of event taking place
+     */
     public String getEventDescription() { return description; }
 }

@@ -1,10 +1,15 @@
+/*
+    TODO: URL
+    This file is new for assessment 3.
+ */
+
 package io.github.teamfractal.entity;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Adam on 20/02/2017.
+ * Created by Richard on 20/02/2017.
  */
 
 class TileEvent implements RandomEvent {
@@ -31,6 +36,14 @@ class TileEvent implements RandomEvent {
                     {"Ancient Civilisation", "The remains of an advanced civilisation has been discovered on one of your tiles. Its production values have dramatically increased from their knowledge."}
             };
 
+    /**
+     * Constructor for the TileEvent class
+     * @param ore           - Ore modifier for the tile
+     * @param energy        - Energy modifier for the tile
+     * @param food          - Food modifier for the tile
+     * @param eventName     - Name of the event
+     * @param description   - Description of the event
+     */
     public TileEvent(int ore, int energy, int food, String eventName, String description) {
         this.tileModifiers[0] = ore;
         this.tileModifiers[1] = energy;
@@ -38,6 +51,11 @@ class TileEvent implements RandomEvent {
         this.eventName = eventName;
         this.description = description;
     }
+
+    /**
+     * Implements the random event by changing values in a random LandPlot owned by the player
+     * @param player    - Player the event happens to
+     */
     public void activate(Player player) {
         ArrayList<LandPlot> playerLand = player.getLand();
         if (playerLand.size() <= 0) {
@@ -51,8 +69,17 @@ class TileEvent implements RandomEvent {
         tile.productionModifiers[2] = tile.productionModifiers[2] + this.tileModifiers[2];
     }
 
+    /**
+     * Get method for eventName
+     * @return  eventName   - Name of event taking place
+     */
     public String getEventName() {
         return eventName;
     }
-    public String getDescription() { return description; }
+
+    /**
+     * Get method for description
+     * @return  eventName   - Description of event taking place
+     */
+    public String getEventDescription() { return description; }
 }

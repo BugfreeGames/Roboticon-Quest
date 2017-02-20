@@ -1,3 +1,7 @@
+/*
+    TODO: URL
+    This class is new for assessment 3.
+ */
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.util.PlotManager;
@@ -14,17 +18,14 @@ class PlayerEvent implements RandomEvent {
     public String description;
     private int[] tileModifiers = new int[5];
     private int addRoboticon;
-    private int addLand;
-    private PlotManager plotManger;
-    private LandPlot plot;
     private Random rand;
     public static int[][] TEMPLATEVALS =
             {
-                    {20, 0, 0, 0, 0},
-                    {0, 20, 0, 0, 0},
-                    {0, 0, 20, 0, 0},
-                    {0, 0, 0, 1, 0},
-                    {100, 100, 100, 0, 0}
+                    {20, 0, 0, 0},
+                    {0, 20, 0, 0},
+                    {0, 0, 20, 0},
+                    {0, 0, 0, 1},
+                    {100, 100, 100, 0}
             };
     public static String[][] TEMPLATESTRINGS =
             {
@@ -35,16 +36,29 @@ class PlayerEvent implements RandomEvent {
                     {"Alien Gift", "We found a small Alien colony on this planet. They have started worshipping us as deities, and gifted us all of their possessions."}
             };
 
-    public PlayerEvent(int ore, int energy, int food, int addRoboticon, int addLand, String eventName, String description) {
+    /**
+     * Constructor for the PlayerEvent class
+     * @param ore           - Number of ore to be added/removed from player inventory
+     * @param energy        - Number of energy to be added/removed from player inventory
+     * @param food          - Number of food to be added/removed from player inventory
+     * @param addRoboticon  - Whether a roboticon will be added to the players inventory 1 = True, 0 = False
+     * @param eventName     - Name of event
+     * @param description   - Description of event
+     */
+    public PlayerEvent(int ore, int energy, int food, int addRoboticon, String eventName, String description) {
         this.tileModifiers[0] = ore;
         this.tileModifiers[1] = energy;
         this.tileModifiers[2] = food;
         this.eventName = eventName;
         this.description = description;
         this.addRoboticon = addRoboticon;
-        this.addLand = addLand;
         this.rand = new Random();
     }
+
+    /**
+     * Implements the random event by changing values in a given Player object.
+     * @param player    - The Player that the event is happening to
+     */
     public void activate(Player player) {
         player.setOre(player.getOre() + tileModifiers[0]);        // Add/Subtract resources from inventory
         player.setEnergy(player.getEnergy() + tileModifiers[1]);
@@ -53,8 +67,18 @@ class PlayerEvent implements RandomEvent {
             player.roboticonList.add(new Roboticon(rand.nextInt(10000)));   // Add a new roboticon if event specifies
         }
     }
+
+    /**
+     * Get method for eventName
+     * @return  eventName   - Name of event taking place
+     */
     public String getEventName() {
         return eventName;
     }
+
+    /**
+     * Get method for description
+     * @return  eventName   - Description of event taking place
+     */
     public String getEventDescription() { return description; }
 }
