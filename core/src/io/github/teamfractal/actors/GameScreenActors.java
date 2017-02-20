@@ -29,6 +29,7 @@ public class GameScreenActors {
 	private GameScreen screen;
 	private Label phaseInfo;
 	private Label playerStats;
+	private Label winningPlayer;
 	private TextButton buyLandPlotBtn;
 	private TextButton installRoboticonBtn;
 	private TextButton installRoboticonBtnCancel;
@@ -112,7 +113,6 @@ public class GameScreenActors {
 		t.row();
 	}
 
-
 	/**
 	 * Bind all button events.
 	 */
@@ -180,6 +180,9 @@ public class GameScreenActors {
 							case 1:
 								type = ResourceType.ENERGY;
 								break;
+							case 2:
+								type = ResourceType.FOOD;
+								break;
 							default:
 								type = ResourceType.Unknown;
 								break;
@@ -191,7 +194,7 @@ public class GameScreenActors {
 								break;
 							}
 						}
-
+						
 						if (roboticon != null) {
 							selectedPlot.installRoboticon(roboticon);
 							TiledMapTileLayer.Cell roboticonTile = selectedPlot.getRoboticonTile();
@@ -234,8 +237,7 @@ public class GameScreenActors {
 			// Purchase LandPlot.
 			case 1:
 				buyLandPlotBtn.setPosition(x + 10, y);
-				if (game.canPurchaseLandThisTurn()
-						&& !plot.hasOwner()
+				if (!plot.hasOwner()
 						&& player.haveEnoughMoney(plot)) {
 					buyLandPlotBtn.setDisabled(false);
 				} else {
@@ -280,7 +282,7 @@ public class GameScreenActors {
 	 * Updates the UI display.
 	 */
 	public void textUpdate() {
-		String phaseText = "Player " + (game.getPlayerInt() + 1) + "; Phase " + game.getPhase() + " - " + game.getPhaseString();
+		String phaseText = game.getPlayer().getName() + "; Phase " + game.getPhase() + " - " + game.getPhaseString();
 		phaseInfo.setText(phaseText);
 
 		String statText = "Ore: " + game.getPlayer().getOre()
@@ -315,7 +317,9 @@ public class GameScreenActors {
 	 */
 	public void showPlotStats(LandPlot plot, float x, float y) {
 		String plotStatText = "Ore: " + plot.getResource(ResourceType.ORE)
-				+ "  Energy: " + plot.getResource(ResourceType.ENERGY);
+				+ "  Energy: " + plot.getResource(ResourceType.ENERGY)
+				+ "  Food: " + plot.getResource(ResourceType.FOOD)
+				+ "\n" + plot.toString();
 
 		plotStats.setText(plotStatText);
 		plotStats.setPosition(x, y);
@@ -340,6 +344,8 @@ public class GameScreenActors {
 	public void hideInstallRoboticon() {
 		installRoboticonTable.setVisible(false);
 	}
+	public void hideNextButton(){ nextButton.setVisible(false); }
+	public void showNextButton(){ nextButton.setVisible(true); }
 
 	/**
 	 * Check if install roboticon dialog is visible.
