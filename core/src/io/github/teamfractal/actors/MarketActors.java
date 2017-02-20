@@ -1,3 +1,8 @@
+/*
+    <TODO URL>
+    This is a new class for assessment 3 acting as a menu through which a player can access the various parts of the
+    market.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -5,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-
 import io.github.teamfractal.RoboticonQuest;
 import io.github.teamfractal.screens.CasinoScreen;
 import io.github.teamfractal.screens.MarketScreen;
@@ -19,11 +23,20 @@ public class MarketActors extends Table {
     private ResourceMarketScreen marketScreen;
     private AuctionScreen auctionScreen;
 
+    /**
+     * MarketActors
+     * Contains the elements of the screen allowing the player to access the sections of the market system.
+     *
+     * @param game
+     * @param screen
+     */
     public MarketActors(final RoboticonQuest game, MarketScreen screen) {
         center();
         Skin skin = game.skin;
         this.game = game;
 
+        // Create the screens that the market screen leads to, passing the market screen so that the screens can return
+        // the player to the market screen.
         this.casinoScreen = new CasinoScreen(this.game, screen);
         this.marketScreen = new ResourceMarketScreen(this.game, screen);
         this.auctionScreen = new AuctionScreen(this.game, screen);

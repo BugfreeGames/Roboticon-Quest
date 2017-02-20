@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	This class is new for assessment 3 in order to implement the auction system.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -38,11 +42,18 @@ public class AuctionActors extends Table {
 	private TextField auctionItemAmount;
 	private TextButton auctionItemButton;
 
+	/**
+	 * The Auction actors
+	 * For building the interface for the auction system..
+	 *
+	 * @param game    The RoboticonQuest object representing the game.
+	 * @param screen   The AuctionScreen containing the actors.
+	 * @param marketScreen  The MarketScreen to return to when leaving the AuctionScreen.
+	 */
 	public AuctionActors(final RoboticonQuest game, AuctionScreen screen, final MarketScreen marketScreen) {
 		center();
 		Skin skin = game.skin;
 		this.game = game;
-		Stage stage = screen.getStage();
 		auction = game.auction;
 		
 		// Create UI Components
@@ -112,7 +123,6 @@ public class AuctionActors extends Table {
 		row();
 		add(returnButton);
 
-		//debugAll();
 		pad(20);
 		
 		bindEvents();
@@ -120,6 +130,8 @@ public class AuctionActors extends Table {
 	
 	/**
 	 * Bind button events.
+	 *
+	 * @return none
 	 */
 	private void bindEvents() {
 		auctionItemButton.addListener(new ClickListener() {
@@ -147,7 +159,8 @@ public class AuctionActors extends Table {
 				if(itemsUpForBiddingSelectBox.getItems().size > 0) {
 					try {
 						AuctionBid bid = new AuctionBid(Integer.parseInt(bidAmount.getText()), game.getPlayer());
-						auction.getAuctionItemAtIndex(itemsUpForBiddingSelectBox.getSelectedIndex(), game.getPlayer()).placeBid(bid);
+						auction.getAuctionItemAtIndex(itemsUpForBiddingSelectBox.getSelectedIndex(),
+								game.getPlayer()).placeBid(bid);
 
 						widgetUpdate(false);
 					} catch (NotEnoughMoneyException e) {
@@ -161,7 +174,8 @@ public class AuctionActors extends Table {
 			@Override
 			public void changed(ChangeEvent event, Actor actor){
 				if (auctionableItemsSelectBox.getSelectedIndex() > 2){
-					auctionItemAmount.setVisible(false);	//Hide the quantity box if the selected item is not a resource.
+					auctionItemAmount.setVisible(false);	//Hide the quantity box if the selected item is not a
+															//resource.
 				}
 				else{
 					auctionItemAmount.setVisible(true);
@@ -170,6 +184,11 @@ public class AuctionActors extends Table {
 		});
 	}
 
+	/**
+	 * Updates the UI elements after a change has been made to the state of the game - called manually when required.
+	 *
+	 * @param doDisablePuttingItemsUpForAuction
+     */
 	public void widgetUpdate(boolean doDisablePuttingItemsUpForAuction) {
 		if(doDisablePuttingItemsUpForAuction){
 			putUpItemTitle.setText("You have already put up an item for auction this turn.");
@@ -180,7 +199,12 @@ public class AuctionActors extends Table {
 		
 		itemsUpForBiddingSelectBox.setItems(getCurrentAuctionItemsStrings());
 	}
-	
+
+	/**
+	 * Get string representations from the auctionableObjects array.
+	 *
+	 * @return a string array of the current auctionable items from the auctionableObjects array.
+     */
 	private String[] getCurrentPlayerAuctionableItemStrings() {
 		Object[] auctionableObjects = auction.getPlayerAuctionableItems(game.getPlayer());
 		String[] strings = new String[auctionableObjects.length];
@@ -191,7 +215,12 @@ public class AuctionActors extends Table {
 		
 		return strings;
 	}
-	
+
+	/**
+	 * Get string representations of the items currently up for auction.
+	 *
+	 * @return a string array of the current items up for auction.
+     */
 	private String[] getCurrentAuctionItemsStrings() {
 		Object[] auctionItems = auction.getAuctionItems(game.getPlayer());
 		String[] strings = new String[auctionItems.length];

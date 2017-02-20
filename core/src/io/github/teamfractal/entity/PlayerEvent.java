@@ -28,11 +28,11 @@ class PlayerEvent implements RandomEvent {
             };
     public static String[][] TEMPLATESTRINGS =
             {
-                    {"Ore Deposits", "Our Roboticons have been mining large Ore deposits, and we have produced an extra 20 Ore as a result."},
-                    {"Electrical Surge", "Good weather has meant our solar arrays have been functioning above average, and have produced an extra 20 Energy."},
+                    {"Ore Deposits", "Our Roboticons have been mining large Ore deposits,\n and we have produced an extra 20 Ore as a result."},
+                    {"Electrical Surge", "Good weather has meant our solar arrays have been \nfunctioning above average, and have produced an extra 20 Energy."},
                     {"Bountiful Harvest", "The recent harvest has been exceptional. We have produced a bonus 20 Food."},
-                    {"Scrapheap Challenge", "A Roboticon has been assembled from salvaged scrap components, it has been added to your inventory."},
-                    {"Alien Gift", "We found a small Alien colony on this planet. They have started worshipping us as deities, and gifted us all of their possessions."}
+                    {"Scrapheap Challenge", "A Roboticon has been assembled from salvaged\n scrap components, it has been added to your inventory."},
+                    {"Alien Gift", "We found a small Alien colony on this planet.\n They have started worshipping us as deities,\n and gifted us all of their possessions."}
             };
 
     public PlayerEvent(int ore, int energy, int food, int addRoboticon, int addLand, String eventName, String description) {

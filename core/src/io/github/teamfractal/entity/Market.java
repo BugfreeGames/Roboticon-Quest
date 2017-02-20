@@ -1,3 +1,6 @@
+/*
+	<TODO URL>
+ */
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.entity.enums.ResourceType;
@@ -9,7 +12,6 @@ public class Market {
 	private static final int ENERGY_DEFAULT_PRICE = 20;
 	private static final int FOOD_DEFAULT_PRICE = 30;
 	private static final int ROBOTICON_DEFAULT_PRICE = 40;
-	private static final int CUSTOMISATION_DEFAULT_PRICE = 10;
 	private static final int ACCELERATOR_DEFAULT = 1;
 	private static final int ORE_DEFAULT_AMOUNT = 0;
 	private static final int ENERGY_DEFAULT_AMOUNT = 16;
@@ -32,7 +34,6 @@ public class Market {
 		setAccelerator(ACCELERATOR_DEFAULT);
 	}
 
-	//<editor-fold desc="Resource getters and setters">
 	private int food;
 	private int energy;
 	private int ore;
@@ -69,19 +70,6 @@ public class Market {
 	 */
 	int getRoboticon() {
 		return roboticon;
-	}
-
-	/**
-	 * Get the total amount of all available resources added together.
-	 * @return   The total amount.
-	 */
-
-	int getAccelerator() {
-		return accelerator; 
-	}
-
-	private synchronized int getTotalResourceCount() {
-		return food + energy + ore + roboticon;
 	}
 
 	/**
@@ -139,8 +127,6 @@ public class Market {
 	void setAccelerator(int accel) {
 		accelerator = accel;
 	}
-
-	//</editor-fold>
 
 	/**
 	 * Get the amount of specific resource.

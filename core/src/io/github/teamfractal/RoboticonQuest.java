@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import io.github.teamfractal.animation.AnimationPhaseTimeout;
@@ -151,12 +152,17 @@ public class RoboticonQuest extends Game {
 
 			// End phase - Clean up and move to next player.
 			case 6:
-				this.nextPlayer();
-				// Choose and implement random event for the new player
 				currentEvent = eventGenerator.chooseEvent();
 				currentEvent.activate(playerList.get(currentPlayer));
+				if(currentEvent != null) {
+					RandomEventScreen screen = new RandomEventScreen(this, currentEvent);
+					setScreen(screen);
+				}
+				// Choose and implement random event for the new player
 				break;
 
+			case 7:
+				nextPlayer();
 			// Phase 1: Enable purchase of a LandPlot
 			case 1:
 				setScreen(gameScreen);

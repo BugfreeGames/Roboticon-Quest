@@ -5,27 +5,27 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.actors.RoboticonMarketActors;
-import io.github.teamfractal.actors.ScoreScreenActors;
+import io.github.teamfractal.actors.RandomEventActors;
+import io.github.teamfractal.entity.RandomEvent;
 
-public class ScoreScreen extends AbstractAnimationScreen implements Screen {
 
+public class RandomEventScreen implements Screen {
     final RoboticonQuest game;
     final Stage stage;
     final Table table;
-    private ScoreScreenActors actors;
+    private final RandomEventActors eventActors;
 
-    public ScoreScreen(final RoboticonQuest game) {
+    public RandomEventScreen(final RoboticonQuest game, RandomEvent event) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
-        this.actors = new ScoreScreenActors(game);
         this.table = new Table();
         table.setFillParent(true);
-        table.top().left().add(actors);
-        table.align(Align.center);
+        
+        eventActors = new RandomEventActors(game, this, event); // generates actors for the screen
+        table.add(eventActors);
         stage.addActor(table);
     }
 
@@ -40,14 +40,11 @@ public class ScoreScreen extends AbstractAnimationScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
-
-        renderAnimation(delta);
     }
 
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
-        game.getBatch().setProjectionMatrix(stage.getCamera().combined);
     }
 
     @Override
@@ -74,18 +71,5 @@ public class ScoreScreen extends AbstractAnimationScreen implements Screen {
     }
     public Stage getStage(){
         return this.stage;
-    }
-
-    @Override
-    protected RoboticonQuest getGame() {
-        return game;
-    }
-
-    @Override
-    public Size getScreenSize() {
-        Size s = new Size();
-        s.Width = stage.getViewport().getScreenWidth();
-        s.Height = stage.getViewport().getScreenHeight();
-        return s;
     }
 }

@@ -1,3 +1,8 @@
+/*
+	<TODO URL>
+	This class has not been changed apart from the alteration of the time delay on the animation, from three seconds
+	to two seconds.
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,7 +11,6 @@ import io.github.teamfractal.entity.Player;
 import io.github.teamfractal.screens.AbstractAnimationScreen;
 
 public class AnimationAddResources implements IAnimation {
-	private final Player player;
 	private final int energy;
 	private final int food;
 	private final int ore;
@@ -22,7 +26,6 @@ public class AnimationAddResources implements IAnimation {
 	 */
 	public AnimationAddResources(Player player, int energy, int food, int ore) {
 		time = 0;
-		this.player = player;
 		this.energy = energy;
 		this.food = food;
 		this.ore = ore;
@@ -83,8 +86,8 @@ public class AnimationAddResources implements IAnimation {
 		}
 	}
 
-	// Time length for the animation in second.
-	private static final float animationLength = 3;
+	// Time length for the animation in seconds.
+	private static final float animationLength = 2;
 
 	/**
 	 * Render call.
@@ -125,14 +128,5 @@ public class AnimationAddResources implements IAnimation {
 	public void callAnimationFinish() {
 		if (callback != null)
 			callback.OnAnimationFinish();
-	}
-
-	/**
-	 * Cancel the animation.
-	 */
-	@Override
-	public void cancelAnimation() {
-		callback = null;
-		time += animationLength;
 	}
 }

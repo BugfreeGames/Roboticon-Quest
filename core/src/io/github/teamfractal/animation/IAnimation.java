@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	The only change made was the removal of an unused function.
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -20,5 +24,4 @@ public interface IAnimation {
 	 */
 	void setAnimationFinish(IAnimationFinish callback);
 	void callAnimationFinish();
-	void cancelAnimation();
 }

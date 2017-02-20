@@ -1,9 +1,12 @@
+/*
+	<TODO URL>
+	The only change was the removal of a redundant import.
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import io.github.teamfractal.entity.Player;
 import io.github.teamfractal.screens.AbstractAnimationScreen;
 
 public class AnimationShowPlayer implements IAnimation {
@@ -85,11 +88,6 @@ public class AnimationShowPlayer implements IAnimation {
 
 	@Override
 	public void callAnimationFinish() {
-
-	}
-
-	@Override
-	public void cancelAnimation() {
 
 	}
 }

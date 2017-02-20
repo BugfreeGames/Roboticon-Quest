@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	The only changes to this file have been the removal of redundant methods.
+ */
 package io.github.teamfractal.entity;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -18,12 +22,6 @@ public class LandPlot {
 	
 	int x, y;
 
-
-	//<editor-fold desc="Class getters">
-	public TiledMapTileLayer.Cell getMapTile() {
-		return mapTile;
-	}
-
 	public TiledMapTileLayer.Cell getPlayerTile() {
 		return playerTile;
 	}
@@ -35,15 +33,6 @@ public class LandPlot {
 	public Player getOwner() {
 		return owner;
 	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
 
 	public boolean setOwner(Player player) {
 		if (hasOwner()) {
@@ -58,15 +47,6 @@ public class LandPlot {
 	public boolean hasOwner() {
 		return getOwner() != null;
 	}
-
-	public void removeOwner() {
-		if (!hasOwner())
-			return ;
-
-		owner.removeLandPlot(this);
-	}
-	
-	//</editor-fold>
 
 	private final int IndexOre = 0;
 	private final int IndexEnergy = 1;
@@ -83,8 +63,6 @@ public class LandPlot {
 	 * [ Ore, Energy, Food ]
 	 */
 	private int[] productionAmounts;
-	private boolean owned;
-	private Roboticon installedRoboticon;
 	private boolean hasRoboticon;
 
 	/**
@@ -96,7 +74,6 @@ public class LandPlot {
 	 */
 	public LandPlot(int ore, int energy, int food) {
 		this.productionAmounts = new int[]{ore, energy, food};
-		this.owned = false;
 	}
 
 	public void setupTile (PlotManager plotManager, int x, int y, String tileName) {
@@ -143,13 +120,11 @@ public class LandPlot {
 			int index = resourceTypeToIndex(roboticon.getCustomisation());
 			if (roboticon.setInstalledLandplot(this)) {
 				productionModifiers[index] += ROBOTICON_SPECIALISED_YIELD_INCREASE_PERCENTAGE;
-				this.installedRoboticon = roboticon;
 				return true;
 			}
 		}
 		else{
 			if (roboticon.setInstalledLandplot(this)) {
-				this.installedRoboticon = roboticon;
 				return true;
 			}
 		}

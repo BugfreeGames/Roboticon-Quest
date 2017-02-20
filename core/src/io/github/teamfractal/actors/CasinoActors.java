@@ -1,41 +1,23 @@
+/*
+    <TODO URL>
+    This class was added for assessment 3 to implement the casino functionality.
+ */
+
 package io.github.teamfractal.actors;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-
-import io.github.teamfractal.Auction;
 import io.github.teamfractal.MiniGame;
 import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.entity.Player;
-import io.github.teamfractal.entity.enums.ResourceType;
-import io.github.teamfractal.exception.NotEnoughMoneyException;
-import io.github.teamfractal.exception.NotEnoughResourceException;
 import io.github.teamfractal.screens.CasinoScreen;
 import io.github.teamfractal.screens.MarketScreen;
-import io.github.teamfractal.screens.ResourceMarketScreen;
-import io.github.teamfractal.util.AuctionBid;
-import io.github.teamfractal.util.AuctionableItem;
-
-import javax.xml.soap.Text;
 
 public class CasinoActors extends Table {
-    private ResourceMarketActors resourceMarketActors;
-
     private RoboticonQuest game;
     private MiniGame miniGame;
 

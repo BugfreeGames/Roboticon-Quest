@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	No changes have been made to this file
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -110,10 +114,5 @@ public class AnimationPhaseTimeout implements IAnimation {
 			if (callback != null)
 				callback.OnAnimationFinish();
 		}
-	}
-
-	@Override
-	public void cancelAnimation() {
-		callbackDone = true;
 	}
 }
