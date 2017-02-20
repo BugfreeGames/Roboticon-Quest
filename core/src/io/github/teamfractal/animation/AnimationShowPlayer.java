@@ -90,9 +90,4 @@ public class AnimationShowPlayer implements IAnimation {
 	public void callAnimationFinish() {
 
 	}
-
-	@Override
-	public void cancelAnimation() {
-
-	}
 }

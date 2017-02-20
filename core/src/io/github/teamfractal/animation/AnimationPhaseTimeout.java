@@ -115,9 +115,4 @@ public class AnimationPhaseTimeout implements IAnimation {
 				callback.OnAnimationFinish();
 		}
 	}
-
-	@Override
-	public void cancelAnimation() {
-		callbackDone = true;
-	}
 }

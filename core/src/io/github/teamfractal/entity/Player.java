@@ -40,7 +40,7 @@ public class Player {
 	public Player(RoboticonQuest game, String name){
 		this.game = game;
 		this.name = name;
-		this.roboticonList = new Array<Roboticon>();
+		this.roboticonList = new ArrayList<Roboticon>();
 	}
 	
 	/**
@@ -309,7 +309,7 @@ public class Player {
 	}
 	
 	public void removeRoboticon(Roboticon roboticon) {
-		roboticonList.removeIndex(roboticonList.indexOf(roboticon, true));
+		roboticonList.remove(roboticonList.indexOf(roboticon));
 	}
 
 	/**

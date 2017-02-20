@@ -65,7 +65,7 @@ public class Auction {
 	}
 	
 	public Object[] getPlayerAuctionableItems(Player player){
-		Array<Roboticon> playerRoboticons = player.getRoboticons();
+		ArrayList<Roboticon> playerRoboticons = player.getRoboticons();
 		int numItems = 3 + player.getNumUninstalledRoboticons();	//Player can always choose to auction food, energy, ore
 																	//Plus an item for each (non-installed) roboticon they own.		
 		Object[] auctionableObjects = new Object[numItems];
@@ -76,7 +76,7 @@ public class Auction {
 		
 		int indexInAuctionableObjects = 3;
 		
-		for (int i = 0; i < playerRoboticons.size; i++) {
+		for (int i = 0; i < playerRoboticons.size(); i++) {
 			Roboticon roboticon = playerRoboticons.get(i);
 
 			if(!roboticon.isInstalled()){

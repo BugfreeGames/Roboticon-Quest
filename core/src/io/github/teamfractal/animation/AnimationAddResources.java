@@ -129,13 +129,4 @@ public class AnimationAddResources implements IAnimation {
 		if (callback != null)
 			callback.OnAnimationFinish();
 	}
-
-	/**
-	 * Cancel the animation.
-	 */
-	@Override
-	public void cancelAnimation() {
-		callback = null;
-		time += animationLength;
-	}
 }
