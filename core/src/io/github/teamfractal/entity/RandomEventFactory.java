@@ -24,8 +24,7 @@ public class RandomEventFactory {
                     return createRoboticonEvent();
             }
         }
-        System.out.println("Creating a NoEvent");
-        return new NoEvent();
+        return null;
     }
 
     public boolean EventTakingPlace(int percentage) {

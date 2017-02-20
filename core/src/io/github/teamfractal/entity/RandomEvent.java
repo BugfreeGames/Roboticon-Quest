@@ -6,5 +6,8 @@ package io.github.teamfractal.entity;
 
 public interface RandomEvent {
     void activate(Player player);
+
     String getEventName();
+
+    String getEventDescription();
 }
