@@ -1,7 +1,10 @@
+/*
+	<TODO URL>
+	The only changes made to this file were the removal of redundant methods.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -10,27 +13,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 
 public class AdjustableActor extends Table {
-	//<editor-fold desc="UI Components">
 	private final TextButton subButton;
 	private final TextButton addButton;
 	private final TextButton actButton;
 	private final Label valueLabel;
 	private final Label titleLabel;
-	//</editor-fold>
 
-	//<editor-fold desc="Getter / Setter">
 	private int value = 0;
 	private int min   = 0;
 	private int max   = 9;
 	private ChangeListener actionEvent;
-
-	/**
-	 * Get current title string.
-	 * @return     The title text.
-	 */
-	public String getTitle() {
-		return titleLabel.getText().toString();
-	}
 
 	/**
 	 * Set a new title string.
@@ -58,28 +50,12 @@ public class AdjustableActor extends Table {
 	}
 
 	/**
-	 * Get current minimum value.
-	 * @return     Currently set minimum value.
-	 */
-	public int getMin() {
-		return min;
-	}
-
-	/**
 	 * Set a new minimum value.
 	 * @param min       The new minimum value.
 	 */
 	public void setMin(int min) {
 		this.min = min;
 		ensureValueInRange();
-	}
-
-	/**
-	 * Get current maximum value.
-	 * @return     Currently set maximum value.
-	 */
-	public int getMax() {
-		return max;
 	}
 
 	/**
@@ -98,7 +74,6 @@ public class AdjustableActor extends Table {
 	public void setActionEvent(ChangeListener actionEvent) {
 		this.actionEvent = actionEvent;
 	}
-	//</editor-fold>
 
 	/**
 	 * Ensure that the value is in the range of min and max.
@@ -165,25 +140,6 @@ public class AdjustableActor extends Table {
 	}
 
 	/**
-	 * The adjustable actor
-	 * For an easy way of adjust values in a step of 1 / -1.
-	 *
-	 * @param skin    The skin file for the UI.
-	 * @param value   The default value.
-	 * @param min     The minimum value.
-	 * @param max     The maximum value.
-	 * @param title   The adjustable title.
-	 * @param action  The action button text.
-	 */
-	public AdjustableActor(Skin skin, int value, int min, int max, String title, String action) {
-		this(skin, title, action);
-
-		setMax(max);
-		setMin(min);
-		setValue(value);
-	}
-
-	/**
 	 * Binds events to buttons.
 	 */
 	private void bindButtonEvents() {
@@ -222,7 +178,5 @@ public class AdjustableActor extends Table {
 	@Override
 	protected void sizeChanged() {
 		super.sizeChanged();
-
-		// TODO: manipulate actor size?
 	}
 }

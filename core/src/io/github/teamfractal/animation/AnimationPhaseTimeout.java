@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	No changes have been made to this file
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;

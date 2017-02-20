@@ -1,3 +1,7 @@
+/*
+	<TODO URL>
+	This class has had its layout changed, but remains mostly the same as the previous team wrote it.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -25,15 +29,11 @@ public class ResourceMarketActors extends Table {
 	private final AdjustableActor foodSell;
 	private final TextButton returnButton;
 	private RoboticonQuest game;
-	private Integer buyOreAmount;
-	private Integer sellOreAmount;
-	private Integer buyEnergyAmount;
 	private Label phaseInfo;
 	private Label playerStats;
 	private ResourceMarketScreen screen;
 	private TextButton nextButton;
 	private Label marketStats;
-	private Integer sellEnergyAmount;
 
 	/**
 	 * Get price in string format
@@ -54,7 +54,7 @@ public class ResourceMarketActors extends Table {
 	}
 
 	/**
-	 * Sync. information with the adjustable.
+	 * Sync information with the adjustable.
 	 * @param adjustableActor     The adjustable to manipulate with.
 	 * @param resource            The resource type.
 	 * @param bIsSell             <code>true</code> if the adjustable is for sell,
@@ -148,21 +148,8 @@ public class ResourceMarketActors extends Table {
 		playerStats.setAlignment(Align.center);
 		playerStats.setHeight(90);
 
-		// Add UI components to screen.
-		stage.addActor(phaseInfo);
-		stage.addActor(nextButton);
-		//stage.addActor(playerStats);
-		add(playerStats);
-		row();
-
-		// Setup UI Layout.
-		// Row: Player and Market Stats.
-
-		add(marketStats);
-		rowWithHeight(20);
-
+		//Create an inner table to make the layout surrounding it more manageable
 		Table innerTable = new Table();
-
 		{
 			innerTable.add(oreBuy).padRight(5);
 			innerTable.add(energyBuy);
@@ -175,6 +162,15 @@ public class ResourceMarketActors extends Table {
 			innerTable.add(foodSell).padLeft(5);
 			innerTable.row();
 		}
+
+		// Add UI components to screen.
+		stage.addActor(phaseInfo);
+		stage.addActor(nextButton);
+
+		add(playerStats);
+		row();
+		add(marketStats);
+		rowWithHeight(20);
 
 		add(innerTable);
 		row();

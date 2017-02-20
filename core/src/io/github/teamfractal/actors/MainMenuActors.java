@@ -1,3 +1,8 @@
+/*
+	<TODO URL>
+	The only change to this file was the change to the file path for the image on the splash screen, which is a new
+	image based on the previous teams banner.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.Gdx;

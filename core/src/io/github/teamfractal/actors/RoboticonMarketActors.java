@@ -1,7 +1,12 @@
+/*
+	<TODO URL>
+	This class has received large changes focused on making the layout of the Roboticon purchase screen more
+	user-friendly.
+ */
+
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.btree.utils.DistributionAdapters;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,7 +18,6 @@ import io.github.teamfractal.RoboticonQuest;
 import io.github.teamfractal.entity.Roboticon;
 import io.github.teamfractal.entity.enums.ResourceType;
 import io.github.teamfractal.screens.RoboticonMarketScreen;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -54,15 +58,12 @@ public class RoboticonMarketActors extends Table {
 
 		widgetUpdate();
 
-		// Buy Roboticon Text: Top Left
-		final Label lblBuyRoboticon = new Label("PURCHASE ROBOTICONS IN THIS SECTION", game.skin);
-
-		//Roboticon text to go next to + and - buttons
+		//UI elements
+		final Label lblBuyRoboticon = new Label("PURCHASE ROBOTICONS HERE", game.skin);
 		final Label lblRoboticons = new Label("Roboticons:", game.skin);
-
 		final Label lblRoboticonAmount = new Label(roboticonAmount.toString(), game.skin);
 
-		// Button to increase number of roboticons bought
+		// Button to increase number of roboticons to be purchased
 		final TextButton addRoboticonButton = new TextButton("+", game.skin);
 		addRoboticonButton.addListener(new ChangeListener() {
 			@Override
@@ -72,7 +73,7 @@ public class RoboticonMarketActors extends Table {
 			}
 		});
 
-		// Button to decrease number of roboticons bought
+		// Button to decrease number of roboticons to be purchased
 		final TextButton subRoboticonButton = new TextButton("-", game.skin);
 		subRoboticonButton.addListener(new ChangeListener() {
 			@Override
@@ -96,11 +97,10 @@ public class RoboticonMarketActors extends Table {
 			}
 		});
 
-		// Current Roboticon Text: Top Right
+		// Current Roboticon Text
 		String playerRoboticonText = "CUSTOMISE PLAYER " + (game.getPlayerInt() + 1) + "'S ROBOTICONS HERE";
 		final Label lblCurrentRoboticon = new Label(playerRoboticonText, game.skin);
 
-		// Image widget which displays the roboticon in the player's inventory
 
 		// Buttons to move backwards and forwards in the player's roboticon inventory
 		final TextButton moveLeftRoboticonInventoryBtn = new TextButton("<", game.skin);
@@ -126,10 +126,10 @@ public class RoboticonMarketActors extends Table {
 		});
 
 
-		// Purchase Customisation Text: Bottom Right
+		// Purchase Customisation Text
 		final Label lblPurchaseCustomisation = new Label("Customisation Type:", game.skin);
 
-		// Drop down menu to select how to customise the selected roboticon
+		// Drop down menu to select the customisation type for the selected roboticon
 		final SelectBox<String> customisationDropDown = new SelectBox<String>(game.skin);
 		String[] customisations = {"Energy", "Ore", "Food"};
 		customisationDropDown.setItems(customisations);
@@ -154,18 +154,13 @@ public class RoboticonMarketActors extends Table {
 			}
 		});
 
+		//Align the window objects to the center of the screen.
 		align(Align.center);
 
-		int span = 4; //This is the largest number of columns on any given row
-
-		//Row 1
-		Table row1 = new Table();
-		row1.add(lblBuyRoboticon).colspan(span);
-		add(row1);
+		add(lblBuyRoboticon);
 
 		row();
 
-		//Row 2
 		Table row2 = new Table();
 		row2.add(lblRoboticons);
 		row2.add(subRoboticonButton).width(50);
@@ -175,68 +170,50 @@ public class RoboticonMarketActors extends Table {
 
 		row();
 
-		//Row 3
-		Table row3 = new Table();
-		row3.add(buyRoboticonsButton).colspan(span);
-		add(row3);
+		add(buyRoboticonsButton);
 
 		row();
 
-		//Row 4
-		Table row4 = new Table();
-		row4.add(marketStats).colspan(span);
-		add(row4);
+		add(marketStats);
 
 		//Gap between the sections
-		row().height(20);
-		add().colspan(span);
+		row();
+		add().height(20);
 		row();
 
 		//Row 5
-		Table row5 = new Table();
-		row5.add(lblCurrentRoboticon).colspan(span);
-		add(row5);
+		add(lblCurrentRoboticon);
 
 		row();
 
 		//Row 6
-		Table row6 = new Table();
-		row6.add(roboticonImage).colspan(span);
-		add(row6);
+		add(roboticonImage);
 
 		row();
 
 		//Row 7
-
 		Table row7 = new Table();
 		row7.add(moveLeftRoboticonInventoryBtn).left().width(20);
-		row7.add(roboticonID).colspan(span).center().align(Align.center);
+		row7.add(roboticonID).center().align(Align.center);
 		row7.add(moveRightRoboticonInventoryBtn).right().width(20);
 		add(row7);
 
 		row();
 
 		//Row 8
-		Table row8 = new Table();
-		row8.add(lblPurchaseCustomisation).colspan(span);
-		add(row8);
+		add(lblPurchaseCustomisation);
 
 		row();
 
 		//Row 9
-		Table row9 = new Table();
-		row9.add(customisationDropDown).colspan(span);
-		add(row9);
+		add(customisationDropDown);
 
 		row();
 
 		//Row 10
-		Table row10 = new Table();
-		row10.add(buyCustomisationButton).colspan(span);
-		add(row10);
+		add(buyCustomisationButton);
 
 		row().height(20);
-		add().colspan(span);
 		row();
 
 		final TextButton nextButton = new TextButton("Next ->", game.skin);
@@ -252,6 +229,13 @@ public class RoboticonMarketActors extends Table {
 
 	}
 
+	/**
+	 * Add a number of 0s to the start of a number
+	 *
+	 * @param number the number to pad with 0s
+	 * @param length the length of zeros to append to the number
+     * @return a string containing a number (length) of zeros followed by the number
+     */
 	public String padZero(int number, int length) {
 		String s = "" + number;
 		while (s.length() < length) {
@@ -260,6 +244,11 @@ public class RoboticonMarketActors extends Table {
 		return s;
 	}
 
+	/**
+	 * Get the roboticon selected by its position in the list.
+	 *
+	 * @param roboticonPos The position of the roboticon in the roboticon list.
+     */
 	public void setCurrentlySelectedRoboticon(int roboticonPos) {
 		if (roboticonPos != -1) {
 
@@ -292,6 +281,9 @@ public class RoboticonMarketActors extends Table {
 		roboticonImage.setDrawable(new TextureRegionDrawable(new TextureRegion(roboticonTexture)));
 	}
 
+	/**
+	 * Manually update relevant UI elements to reflect changes.
+	 */
 	public void widgetUpdate() {
 		roboticons.clear();
 		for (Roboticon r : game.getPlayer().getRoboticons()) {

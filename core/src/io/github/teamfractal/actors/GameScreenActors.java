@@ -1,14 +1,18 @@
+/*
+	<TODO URL>
+	This class has been altered for assessment 3.
+		Removed logic for finding the winning player, moved from this class to the RoboticonQuest class.
+		Cleaned up redundant code.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -27,7 +31,6 @@ public class GameScreenActors {
 	private GameScreen screen;
 	private Label phaseInfo;
 	private Label playerStats;
-	private Label winningPlayer;
 	private TextButton buyLandPlotBtn;
 	private TextButton installRoboticonBtn;
 	private TextButton installRoboticonBtnCancel;
@@ -35,7 +38,7 @@ public class GameScreenActors {
 	private SelectBox<String> installRoboticonSelect;
 	private Label plotStats;
 	private TextButton nextButton;
-	private boolean dropDownActive;
+
 	private boolean listUpdated;
 
 	/**
@@ -149,7 +152,6 @@ public class GameScreenActors {
 				plotStats.setVisible(false);
 				hideInstallRoboticon();
 				game.nextPhase();
-				dropDownActive = true;
 				installRoboticonSelect.setItems(game.getPlayer().getRoboticonAmountList());
 				textUpdate();
 			}
@@ -167,7 +169,7 @@ public class GameScreenActors {
 					LandPlot selectedPlot = screen.getSelectedPlot();
 					if (selectedPlot.getOwner() == game.getPlayer() && !selectedPlot.hasRoboticon()) {
 						Roboticon roboticon = null;
-						ResourceType type = ResourceType.Unknown;
+						ResourceType type;
 						int selection = installRoboticonSelect.getSelectedIndex();
 
 						Array<Roboticon> roboticons = game.getPlayer().getRoboticons();
@@ -203,7 +205,6 @@ public class GameScreenActors {
 
 						hideInstallRoboticon();
 						updateRoboticonList();
-						dropDownActive = true;
 
 					} else listUpdated = false;
 				}
@@ -214,7 +215,6 @@ public class GameScreenActors {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				event.stop();
-				dropDownActive = false;
 				hideInstallRoboticon();
 			}
 		});

@@ -1,5 +1,5 @@
 /*
-    <url>
+    <TODO URL>
     This class is new for assessment 3.
  */
 package io.github.teamfractal.actors;
@@ -17,6 +17,12 @@ public class GameCreateActors extends Table {
 
     private Table playerTable = new Table();
 
+    /**
+     * The GameCreateActors
+     * Contains the elements of the interface for the game creation screen.
+     *
+     * @param game the game object containing the state of the game.
+     */
     public GameCreateActors(final RoboticonQuest game){
         this.game = game;
 
@@ -79,6 +85,10 @@ public class GameCreateActors extends Table {
         add(confirmBtn);
     }
 
+    /**
+     * UpdatePlayerTable
+     * To change the elements of the playerTable to reflect changes in the newPlayerList.
+     */
     private void UpdatePlayerTable(){
         playerTable.clearChildren();
         playerTable.add(new Label("List of Players for the Game", this.game.skin));
