@@ -31,7 +31,6 @@ public class ResourceMarketScreen implements Screen {
 		this.table.center();
 		table.setFillParent(true);
 
-		stage.setDebugAll(true);
 		marketActors = new ResourceMarketActors(game, this, marketScreen); // generates actors for the screen
 
 		table.add(marketActors);

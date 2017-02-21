@@ -170,7 +170,8 @@ public class RoboticonQuest extends Game {
 			case 7:
 				nextPlayer();
 			// Phase 1: Enable purchase of a LandPlot
-			case 1:
+				break;
+			case 8:
 				setScreen(gameScreen);
 				gameScreen.addAnimation(new AnimationShowPlayer(getPlayer().getName()));
 				break;
@@ -232,7 +233,7 @@ public class RoboticonQuest extends Game {
 			if(isGameEnded()){
 				scoreScreen = new ScoreScreen(this);
 				setScreen(scoreScreen);
-				phase=7;
+				phase=9;
 			}
 			else {
 				//Close auction bids after every player has had the option to bid
