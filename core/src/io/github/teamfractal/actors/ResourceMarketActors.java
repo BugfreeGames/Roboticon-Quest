@@ -1,7 +1,12 @@
 /*
-	<TODO URL>
-	This class has had its layout changed, but remains mostly the same as the previous team wrote it.
- */
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added a market screen to constructor
+	- Added a return button to return to market screen
+	- Changed 'Gold' to 'Credits'
+	- The screen produced by the class has had its layout changed.
+	- Added player stats to the screen.
+*/
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -119,7 +124,7 @@ public class ResourceMarketActors extends Table {
 
 		playerStats = new Label("Your Resources\n\n\n\n\n", game.skin); //Pad out the initial string with new lines as the label width property does not correctly update
 		marketStats = new Label("", game.skin);
-		Label buyLabel  = new Label("Buy",  skin);
+		Label buyLabel = new Label("Buy", skin);
 		Label sellLabel = new Label("Sell", skin);
 
 		oreBuy = createAdjustable(ResourceType.ORE, false);
@@ -140,11 +145,11 @@ public class ResourceMarketActors extends Table {
 
 		// Adjust properties.
 		phaseInfo.setAlignment(Align.right);
-		marketStats.setAlignment(Align.right);
+		marketStats.setAlignment(Align.center);
 
 		buyLabel.setAlignment(Align.center);
 		sellLabel.setAlignment(Align.center);
-		
+
 		playerStats.setAlignment(Align.center);
 		playerStats.setHeight(90);
 
@@ -165,7 +170,6 @@ public class ResourceMarketActors extends Table {
 
 		// Add UI components to screen.
 		stage.addActor(phaseInfo);
-		stage.addActor(nextButton);
 
 		add(playerStats);
 		row();
@@ -179,21 +183,8 @@ public class ResourceMarketActors extends Table {
 		add(returnButton);
 
 		pad(20);
-		
-		bindEvents();
-		widgetUpdate();
-	}
 
-	/**
-	 * Bind button events.
-	 */
-	private void bindEvents() {
-		nextButton.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				game.nextPhase();
-			}
-		});
+		widgetUpdate();
 	}
 
 	/**
@@ -210,6 +201,7 @@ public class ResourceMarketActors extends Table {
 	 * Updates all widgets on screen
 	 */
 	public void widgetUpdate() {
+		this.center();
 		// update player stats, phase text, and the market stats.
 		String phaseText =
 				game.getPlayer().getName() + "; " +
@@ -251,9 +243,6 @@ public class ResourceMarketActors extends Table {
 		// Center top
 		playerStats.setPosition(width / 2 - width / 8, height - playerStats.getHeight() - 20);
 		playerStats.setWidth(width / 4);
-
-		// Bottom Right
-		nextButton.setPosition(width - nextButton.getWidth() - 10, 10);
 
 		setWidth(width);
 		center();

@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added a toString function
+	- Removed a debug message.
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.entity.enums.ResourceType;

@@ -1,3 +1,19 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Changed Array<Roboticon> to ArrayList<Roboticon> for consistency in types
+	- Removed redundant import statements
+	- Added strings to store Players name, along with a get method, modified the constructor to add this name
+	- Added addResource and addMoney methods
+	- Added score calculation for the player
+	- Replaced literal with constant
+	- Removed landPurchasedthisTurn
+	- Removed produce Resources function
+	- Added Add and Remove roboticon methods
+	- Added support for food
+	- Added getNumUninstalledRoboticons, hasEnoughResource functions
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.RoboticonQuest;
@@ -10,10 +26,8 @@ import io.github.teamfractal.exception.NotCommonResourceException;
 import io.github.teamfractal.exception.NotEnoughResourceException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
+
 
 import com.badlogic.gdx.utils.Array;
 

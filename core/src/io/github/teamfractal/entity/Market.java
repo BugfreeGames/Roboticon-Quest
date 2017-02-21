@@ -1,5 +1,9 @@
 /*
-	<TODO URL>
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes Made:
+	- Replaced literals with constants.
+	- Implementing Supply/Demand based market by adding getCurvePoint and by modifying the getBuyPrice method
+	- Added produceRoboticons to generate roboticons
  */
 package io.github.teamfractal.entity;
 
@@ -17,7 +21,7 @@ public class Market {
 	private static final int ENERGY_DEFAULT_AMOUNT = 16;
 	private static final int FOOD_DEFAULT_AMOUNT = 16;
 	private static final int ROBOTICON_DEFAULT_AMOUNT = 12;
-	private static final int CUSTOMISATION_BUY_PRICE = 1000;
+	private static final int CUSTOMISATION_BUY_PRICE = 20;
 	private static final int CUSTOMISATION_SELL_PRICE = 10;
   
 	private final int ROBOTICON_ORE_COST = 2;

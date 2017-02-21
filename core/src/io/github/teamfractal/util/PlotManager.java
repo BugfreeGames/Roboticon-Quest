@@ -1,3 +1,11 @@
+/*
+	Changes Made:
+	- Replaced variables and literals with constants.
+	- Added loop to initialise plot list with empty plots instead of null values
+	- Added getNumUnownedTiles()
+	- Added tile values for Cs department, ron cooke hub and regular tiles
+
+ */
 package io.github.teamfractal.util;
 
 import com.badlogic.gdx.maps.MapLayers;

@@ -1,5 +1,5 @@
 /*
-	<TODO URL>
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
 	This class is new for assessment 3 in order to implement the auction system.
  */
 package io.github.teamfractal.actors;

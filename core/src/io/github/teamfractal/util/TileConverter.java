@@ -1,3 +1,9 @@
+/*
+	Changes made:
+	- Added support for food
+	-
+ */
+
 package io.github.teamfractal.util;
 
 

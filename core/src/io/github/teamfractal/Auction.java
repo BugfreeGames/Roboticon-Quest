@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	This is a new class to implement the auction system.
+	Changes Made:
+	- Removed redundant imports.
+ */
+
 package io.github.teamfractal;
 
 import io.github.teamfractal.entity.Player;
@@ -7,9 +14,6 @@ import io.github.teamfractal.util.AuctionBid;
 import io.github.teamfractal.util.AuctionableItem;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-import com.badlogic.gdx.utils.Array;
 
 public class Auction {
 	private ArrayList<AuctionableItem> currentAuctionItems = new ArrayList<AuctionableItem>();

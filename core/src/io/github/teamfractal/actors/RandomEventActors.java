@@ -1,3 +1,6 @@
+/*
+    www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.Gdx;
@@ -18,7 +21,7 @@ public class RandomEventActors extends Table {
         center();
         Label eventTitle = new Label(event.getEventName(), game.skin);
         Label description = new Label(event.getEventDescription(), game.skin);
-        Label screenTitle = new Label("An event has shocked your colony!", game.skin);
+        Label screenTitle = new Label(game.getPlayer().getName() + ", an event has shocked your colony!", game.skin);
         TextButton nextBtn = new TextButton("Continue ->", game.skin);
 
         nextBtn.addListener(new ChangeListener() {

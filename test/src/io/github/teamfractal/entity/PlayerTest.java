@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added player name to testPlayer
+	- Changed roboticonList from Array to ArrayList
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.RoboticonQuest;
