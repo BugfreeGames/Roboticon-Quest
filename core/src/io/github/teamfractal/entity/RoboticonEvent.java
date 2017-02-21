@@ -52,6 +52,8 @@ class RoboticonEvent implements RandomEvent {
         ArrayList<Roboticon> playerRoboticons = player.getRoboticons();
         if (playerRoboticons.size() <= 0) {
             System.out.println("Error in activation: no roboticons in list");
+            eventName = "Missed Opportunity";
+            description = "We found a roboticon upgrade spare, but since you own no roboticons without\nan upgrade, we had to discard it.";
             return;     // No roboticons to customise
         }
         Random rand = new Random();

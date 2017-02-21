@@ -58,6 +58,8 @@ class TileEvent implements RandomEvent {
         ArrayList<LandPlot> playerLand = player.getLand();
         if (playerLand.size() <= 0) {
             System.out.println("Error in activation: no landplots in list");
+            description = "A geological event occurred, but you had no tiles for it to affect. Purchase some land!";
+            eventName = "Missed Opportunity";
             return;     // Player has no tiles to modify
         }
         Random rand = new Random();

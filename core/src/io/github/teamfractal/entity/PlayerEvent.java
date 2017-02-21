@@ -80,5 +80,4 @@ class PlayerEvent implements RandomEvent {
      * Get method for description
      * @return  eventName   - Description of event taking place
      */
-    public String getEventDescription() { return description; }
-}
+    public String getEventDescription() { return description; }}
