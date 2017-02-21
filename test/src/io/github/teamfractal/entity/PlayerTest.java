@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added player name to testPlayer
+	- Changed roboticonList from Array to ArrayList
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.RoboticonQuest;
@@ -41,7 +48,6 @@ public class PlayerTest {
 		Market market = new Market();
 		market.setOre(16);
 		player.setMoney(1000);
-
 
 		int playerMoney = player.getMoney();
 		int orePrice = market.getSellPrice(ResourceType.ORE);
@@ -142,7 +148,7 @@ public class PlayerTest {
 	public void testPlayerCanCustomiseOwnedRoboticons() {
 		Roboticon roboticon3 = new Roboticon(3); 
 		Roboticon roboticon4 = new Roboticon(4);
-		player.roboticonList = new Array<Roboticon>();
+		player.roboticonList = new ArrayList<Roboticon>();
 		player.roboticonList.add(roboticon3);
 		player.roboticonList.add(roboticon4);
 		player.customiseRoboticon(player.roboticonList.get(0), ResourceType.ORE);

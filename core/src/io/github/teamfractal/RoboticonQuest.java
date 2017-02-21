@@ -1,3 +1,11 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added RandomEvent functionality
+	- Removed redundant variable landBoughtThisTurn
+	- Removed redundant method getInstance
+	-
+ */
 package io.github.teamfractal;
 
 import java.util.ArrayList;
@@ -7,17 +15,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import io.github.teamfractal.animation.AnimationPhaseTimeout;
 import io.github.teamfractal.animation.AnimationShowPlayer;
 import io.github.teamfractal.animation.IAnimationFinish;
 import io.github.teamfractal.screens.*;
+import io.github.teamfractal.entity.RandomEventFactory;
+import io.github.teamfractal.entity.RandomEvent;
 import io.github.teamfractal.entity.Market;
 import io.github.teamfractal.entity.Player;
-import io.github.teamfractal.entity.Roboticon;
-import io.github.teamfractal.entity.enums.ResourceType;
-import io.github.teamfractal.util.AuctionableItem;
 import io.github.teamfractal.util.PlotManager;
 
 /**
@@ -26,9 +34,6 @@ import io.github.teamfractal.util.PlotManager;
  */
 public class RoboticonQuest extends Game {
 	static RoboticonQuest _instance;
-	public static RoboticonQuest getInstance() {
-		return _instance;
-	}
 
 	private PlotManager plotManager;
 	SpriteBatch batch;
@@ -41,8 +46,8 @@ public class RoboticonQuest extends Game {
 	private int currentPlayer;
 	public ArrayList<Player> playerList;
 	public Market market;
-	private int landBoughtThisTurn;
-	
+	private RandomEvent currentEvent;
+	private RandomEventFactory eventGenerator;
 	public Auction auction;
 
 	public int getPlayerIndex (Player player) {
@@ -109,12 +114,21 @@ public class RoboticonQuest extends Game {
 		this.currentPlayer = 0;
 		this.market = new Market();
 		plotManager = new PlotManager();
+		eventGenerator = new RandomEventFactory();
 	}
 
 	public void nextPhase () {
 		phase++;
 
 		switch (phase) {
+			//Phase 1: Purchase Tiles
+			case 1:
+			System.out.println("c1>?");
+
+			setScreen(gameScreen);
+			gameScreen.addAnimation(new AnimationShowPlayer(getPlayer().getName()));
+			break;
+			
 			// Phase 2: Purchase Roboticon
 			case 2:
 				RoboticonMarketScreen roboticonMarket = new RoboticonMarketScreen(this);
@@ -143,20 +157,30 @@ public class RoboticonQuest extends Game {
 
 			// Phase 5: Generate resource for player.
 			case 5:
-				setScreen(new ResourceMarketScreen(this));
-				// Restore the next buton on the game screen now that it isn't the current screen.
+				setScreen(new MarketScreen(this));
+				// Restore the next button on the game screen now that it isn't the current screen.
 				gameScreen.showNextButton();
 				break;
 
 			// End phase - Clean up and move to next player.
 			case 6:
-				this.nextPlayer();
+				System.out.println("RndEvents");
+				currentEvent = eventGenerator.chooseEvent();
+				if(currentEvent != null) {
+					currentEvent.activate(playerList.get(currentPlayer));
+					RandomEventScreen screen = new RandomEventScreen(this, currentEvent);
+					setScreen(screen);
+				}
+				else{
+					nextPhase();
+				}
+				// Choose and implement random event for the new player
 				break;
 
-			// Phase 1: Enable purchase of a LandPlot
-			case 1:
-				setScreen(gameScreen);
-				gameScreen.addAnimation(new AnimationShowPlayer(getPlayer().getName()));
+			case 7:
+				System.out.println("Mystcas7");
+
+				nextPlayer();
 				break;
 		}
 
@@ -216,7 +240,7 @@ public class RoboticonQuest extends Game {
 			if(isGameEnded()){
 				scoreScreen = new ScoreScreen(this);
 				setScreen(scoreScreen);
-				phase=7;
+				phase=8;
 			}
 			else {
 				//Close auction bids after every player has had the option to bid

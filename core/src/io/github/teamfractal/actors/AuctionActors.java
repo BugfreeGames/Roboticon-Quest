@@ -1,8 +1,9 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	This class is new for assessment 3 in order to implement the auction system.
+ */
 package io.github.teamfractal.actors;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,21 +17,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldFilter;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-
 import io.github.teamfractal.Auction;
 import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.entity.Player;
-import io.github.teamfractal.entity.enums.ResourceType;
 import io.github.teamfractal.exception.NotEnoughMoneyException;
 import io.github.teamfractal.exception.NotEnoughResourceException;
-import io.github.teamfractal.screens.ResourceMarketScreen;
+import io.github.teamfractal.screens.AuctionScreen;
+import io.github.teamfractal.screens.MarketScreen;
 import io.github.teamfractal.util.AuctionBid;
 import io.github.teamfractal.util.AuctionableItem;
 
-public class ResourceAuctionActors extends Table {
-	private ResourceMarketActors resourceMarketActors;
-	
+public class AuctionActors extends Table {
 	private Auction auction;
 	private RoboticonQuest game;
 	private Label auctionTitle;
@@ -40,17 +36,24 @@ public class ResourceAuctionActors extends Table {
 	private TextButton placeBid;
 	private SelectBox<String> itemsUpForBiddingSelectBox;
 	private TextField bidAmount;
+	private TextButton returnButton;
 	
 	private SelectBox<String> auctionableItemsSelectBox;
 	private TextField auctionItemAmount;
 	private TextButton auctionItemButton;
 
-	public ResourceAuctionActors(final RoboticonQuest game, ResourceMarketScreen screen, ResourceMarketActors resourceMarketActors) {
+	/**
+	 * The Auction actors
+	 * For building the interface for the auction system..
+	 *
+	 * @param game    The RoboticonQuest object representing the game.
+	 * @param screen   The AuctionScreen containing the actors.
+	 * @param marketScreen  The MarketScreen to return to when leaving the AuctionScreen.
+	 */
+	public AuctionActors(final RoboticonQuest game, AuctionScreen screen, final MarketScreen marketScreen) {
 		center();
-		this.resourceMarketActors = resourceMarketActors;
 		Skin skin = game.skin;
 		this.game = game;
-		Stage stage = screen.getStage();
 		auction = game.auction;
 		
 		// Create UI Components
@@ -60,19 +63,23 @@ public class ResourceAuctionActors extends Table {
 		bidAmount = new TextField("0", skin);
 		bidAmountPounds = new Label("£", skin);
 		placeBid = new TextButton("Place Bid", skin);
-		
 		putUpItemTitle = new Label("Put an item up for Auction:", skin);
 		auctionableItemsSelectBox = new SelectBox<String>(skin);
 		auctionItemButton = new TextButton("Auction Item", skin);
-
 		auctionItemAmount = new TextField("1", skin);
+
+		returnButton = new TextButton("Back to the Market Menu", skin);
+		returnButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.setScreen(marketScreen);
+			}
+		});
 		
 		TextFieldFilter digitFilter = new TextFieldFilter() {
 		    public  boolean acceptChar(TextField textField, char c) {
-		         if (Character.isDigit(c))
-		               return true;
-		         return false;
-		    }
+				return Character.isDigit(c);
+			}
 		};
 		
 		auctionItemAmount.setTextFieldFilter(digitFilter);
@@ -111,7 +118,11 @@ public class ResourceAuctionActors extends Table {
 		add().spaceRight(20);
 		add(auctionItemButton);
 
-		//debugAll();
+		row();
+		add().height(10);
+		row();
+		add(returnButton);
+
 		pad(20);
 		
 		bindEvents();
@@ -119,6 +130,8 @@ public class ResourceAuctionActors extends Table {
 	
 	/**
 	 * Bind button events.
+	 *
+	 * @return none
 	 */
 	private void bindEvents() {
 		auctionItemButton.addListener(new ClickListener() {
@@ -143,13 +156,16 @@ public class ResourceAuctionActors extends Table {
 		placeBid.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				try {
-					AuctionBid bid = new AuctionBid(Integer.parseInt(bidAmount.getText()), game.getPlayer());
-					auction.getAuctionItemAtIndex(itemsUpForBiddingSelectBox.getSelectedIndex(), game.getPlayer()).placeBid(bid);
-					
-					widgetUpdate(false);
+				if(itemsUpForBiddingSelectBox.getItems().size > 0) {
+					try {
+						AuctionBid bid = new AuctionBid(Integer.parseInt(bidAmount.getText()), game.getPlayer());
+						auction.getAuctionItemAtIndex(itemsUpForBiddingSelectBox.getSelectedIndex(),
+								game.getPlayer()).placeBid(bid);
+
+						widgetUpdate(false);
 					} catch (NotEnoughMoneyException e) {
-					// TODO: handle exception
+						// TODO: handle exception
+					}
 				}
 			}
 		});
@@ -158,7 +174,8 @@ public class ResourceAuctionActors extends Table {
 			@Override
 			public void changed(ChangeEvent event, Actor actor){
 				if (auctionableItemsSelectBox.getSelectedIndex() > 2){
-					auctionItemAmount.setVisible(false);	//Hide the quantity box if the selected item is not a resource.
+					auctionItemAmount.setVisible(false);	//Hide the quantity box if the selected item is not a
+															//resource.
 				}
 				else{
 					auctionItemAmount.setVisible(true);
@@ -167,7 +184,12 @@ public class ResourceAuctionActors extends Table {
 		});
 	}
 
-	private void widgetUpdate(boolean doDisablePuttingItemsUpForAuction) {
+	/**
+	 * Updates the UI elements after a change has been made to the state of the game - called manually when required.
+	 *
+	 * @param doDisablePuttingItemsUpForAuction
+     */
+	public void widgetUpdate(boolean doDisablePuttingItemsUpForAuction) {
 		if(doDisablePuttingItemsUpForAuction){
 			putUpItemTitle.setText("You have already put up an item for auction this turn.");
 			auctionableItemsSelectBox.setVisible(false);
@@ -176,9 +198,13 @@ public class ResourceAuctionActors extends Table {
 		}
 		
 		itemsUpForBiddingSelectBox.setItems(getCurrentAuctionItemsStrings());
-		resourceMarketActors.widgetUpdate();
 	}
-	
+
+	/**
+	 * Get string representations from the auctionableObjects array.
+	 *
+	 * @return a string array of the current auctionable items from the auctionableObjects array.
+     */
 	private String[] getCurrentPlayerAuctionableItemStrings() {
 		Object[] auctionableObjects = auction.getPlayerAuctionableItems(game.getPlayer());
 		String[] strings = new String[auctionableObjects.length];
@@ -189,7 +215,12 @@ public class ResourceAuctionActors extends Table {
 		
 		return strings;
 	}
-	
+
+	/**
+	 * Get string representations of the items currently up for auction.
+	 *
+	 * @return a string array of the current items up for auction.
+     */
 	private String[] getCurrentAuctionItemsStrings() {
 		Object[] auctionItems = auction.getAuctionItems(game.getPlayer());
 		String[] strings = new String[auctionItems.length];

@@ -1,3 +1,19 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Changed Array<Roboticon> to ArrayList<Roboticon> for consistency in types
+	- Removed redundant import statements
+	- Added strings to store Players name, along with a get method, modified the constructor to add this name
+	- Added addResource and addMoney methods
+	- Added score calculation for the player
+	- Replaced literal with constant
+	- Removed landPurchasedthisTurn
+	- Removed produce Resources function
+	- Added Add and Remove roboticon methods
+	- Added support for food
+	- Added getNumUninstalledRoboticons, hasEnoughResource functions
+ */
+
 package io.github.teamfractal.entity;
 
 import io.github.teamfractal.RoboticonQuest;
@@ -10,22 +26,20 @@ import io.github.teamfractal.exception.NotCommonResourceException;
 import io.github.teamfractal.exception.NotEnoughResourceException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
+
 
 import com.badlogic.gdx.utils.Array;
 
 public class Player {
 	//<editor-fold desc="Resource getter and setter">
-	private int money = 1000000;
+	private int money = 100;
 	private int ore = 0;
 	private int energy = 0;
 	private int food = 0;
 	private String name;
 	ArrayList<LandPlot> landList = new ArrayList<LandPlot>();
-	Array<Roboticon> roboticonList;
+	ArrayList<Roboticon> roboticonList;
 	private RoboticonQuest game;
 	private static final int TILE_COST = 10;
 
@@ -33,12 +47,14 @@ public class Player {
 	public int getOre() { return ore; }
 	public int getEnergy() { return energy; }
 	public int getFood() { return food; }
+	public ArrayList<LandPlot> getLand() { return landList; }
+		
 	public String getName() { return name; }
 
 	public Player(RoboticonQuest game, String name){
 		this.game = game;
 		this.name = name;
-		this.roboticonList = new Array<Roboticon>();
+		this.roboticonList = new ArrayList<Roboticon>();
 	}
 	
 	/**
@@ -290,15 +306,7 @@ public class Player {
 		plot.setOwner(this);
 		return true;
 	}
-	/**
-	 * Get a landplot to produce resources
-	 */
-	public void produceResources(){
-		for (LandPlot plot : landList) {
-			energy += plot.produceResource(ResourceType.ENERGY);
-			ore += plot.produceResource(ResourceType.ORE);
-		}
-	}
+	
 	/**
 	 * Apply roboticon customisation
 	 * @param roboticon  The roboticon to be customised
@@ -315,7 +323,7 @@ public class Player {
 	}
 	
 	public void removeRoboticon(Roboticon roboticon) {
-		roboticonList.removeIndex(roboticonList.indexOf(roboticon, true));
+		roboticonList.remove(roboticonList.indexOf(roboticon));
 	}
 
 	/**
@@ -381,7 +389,7 @@ public class Player {
 		roboticonAmountList.add("Uncustomised x "    + uncustomised);
 		return roboticonAmountList;
 	}
-	public Array<Roboticon> getRoboticons(){
+	public ArrayList<Roboticon> getRoboticons(){
 		return this.roboticonList;
 	}
 
@@ -396,6 +404,7 @@ public class Player {
 		for (LandPlot land : landList) {
 			energy += land.produceResource(ResourceType.ENERGY);
 			ore += land.produceResource(ResourceType.ORE);
+			food += land.produceResource(ResourceType.FOOD);
 		}
 
 		setEnergy(getEnergy() + energy);
@@ -432,10 +441,10 @@ public class Player {
 			return quantity <= ore;
 			
 		case ENERGY:
-			return quantity <= ore;
+			return quantity <= energy;
 			
 		case FOOD:
-			return quantity <= ore;
+			return quantity <= food;
 
 		default:
 			throw new NotEnoughResourceException();

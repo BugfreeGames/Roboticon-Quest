@@ -1,3 +1,9 @@
+/*
+	Changes made:
+	- Added support for food
+	-
+ */
+
 package io.github.teamfractal.util;
 
 
@@ -9,7 +15,7 @@ import io.github.teamfractal.entity.enums.ResourceType;
 import io.github.teamfractal.entity.enums.RoboticonType;
 import io.github.teamfractal.exception.NotCommonResourceException;
 
-public class TileConverter {
+public class TileConverter { 
 	private static TiledMapTileSets tiles;
 	private static RoboticonQuest game;
 

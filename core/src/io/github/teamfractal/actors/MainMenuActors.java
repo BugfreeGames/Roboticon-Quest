@@ -1,3 +1,9 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes Made:
+	- Changed listener on new game button to point to the new game screen.
+	- Changed title image file path to point to new image.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.Gdx;
@@ -13,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import io.github.teamfractal.RoboticonQuest;
 
 
-public class HomeMainMenu extends Table {
+public class MainMenuActors extends Table {
 	private RoboticonQuest game;
 	private TextButton btnNewGame;
 	private TextButton btnExit;
@@ -24,7 +30,7 @@ public class HomeMainMenu extends Table {
 	 * Initialise the Home Menu.
 	 * @param game    The game object.
 	 */
-	public HomeMainMenu(RoboticonQuest game) {
+	public MainMenuActors(RoboticonQuest game) {
 		this.game = game;
 
 		// Create UI Components

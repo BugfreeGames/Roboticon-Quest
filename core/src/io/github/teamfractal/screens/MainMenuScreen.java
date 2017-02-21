@@ -1,23 +1,26 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+    Changes made:
+    - Removed redundant import statements.
+    - Replaced HomeMainMenu with MainMenuActors.
+ */
+
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.actors.AdjustableActor;
-import io.github.teamfractal.actors.HomeMainMenu;
+import io.github.teamfractal.actors.MainMenuActors;
 
 public class MainMenuScreen implements Screen {
 	final RoboticonQuest game;
 	final Stage stage;
 	final Table table;
-	private final HomeMainMenu homeMainMenu;
+	private final MainMenuActors mainMenuActors;
 
 	public MainMenuScreen(final RoboticonQuest game) {
 		this.game = game;
@@ -25,8 +28,8 @@ public class MainMenuScreen implements Screen {
 		this.table = new Table();
 		table.setFillParent(true);
 
-		homeMainMenu = new HomeMainMenu(game);
-		table.center().center().add(homeMainMenu);
+		mainMenuActors = new MainMenuActors(game);
+		table.center().center().add(mainMenuActors);
 
 		stage.addActor(table);
 

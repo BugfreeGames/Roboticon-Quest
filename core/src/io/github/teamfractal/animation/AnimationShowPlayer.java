@@ -1,9 +1,13 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changed to use player name instead of player number.
+	Removal of a redundant import.
+ */
 package io.github.teamfractal.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import io.github.teamfractal.entity.Player;
 import io.github.teamfractal.screens.AbstractAnimationScreen;
 
 public class AnimationShowPlayer implements IAnimation {
@@ -85,11 +89,6 @@ public class AnimationShowPlayer implements IAnimation {
 
 	@Override
 	public void callAnimationFinish() {
-
-	}
-
-	@Override
-	public void cancelAnimation() {
 
 	}
 }

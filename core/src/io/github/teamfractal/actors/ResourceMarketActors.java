@@ -1,3 +1,12 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Added a market screen to constructor
+	- Added a return button to return to market screen
+	- Changed 'Gold' to 'Credits'
+	- The screen produced by the class has had its layout changed.
+	- Added player stats to the screen.
+*/
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +22,7 @@ import com.badlogic.gdx.utils.Align;
 import io.github.teamfractal.RoboticonQuest;
 import io.github.teamfractal.entity.Player;
 import io.github.teamfractal.entity.enums.ResourceType;
+import io.github.teamfractal.screens.MarketScreen;
 import io.github.teamfractal.screens.ResourceMarketScreen;
 
 public class ResourceMarketActors extends Table {
@@ -20,16 +30,15 @@ public class ResourceMarketActors extends Table {
 	private final AdjustableActor oreSell;
 	private final AdjustableActor energyBuy;
 	private final AdjustableActor energySell;
+	private final AdjustableActor foodBuy;
+	private final AdjustableActor foodSell;
+	private final TextButton returnButton;
 	private RoboticonQuest game;
-	private Integer buyOreAmount;
-	private Integer sellOreAmount;
-	private Integer buyEnergyAmount;
 	private Label phaseInfo;
 	private Label playerStats;
 	private ResourceMarketScreen screen;
 	private TextButton nextButton;
 	private Label marketStats;
-	private Integer sellEnergyAmount;
 
 	/**
 	 * Get price in string format
@@ -46,11 +55,11 @@ public class ResourceMarketActors extends Table {
 				+ (bIsSell
 					? game.market.getBuyPrice(resource)
 					: game.market.getSellPrice(resource))
-				+ " Gold";
+				+ " Credits";
 	}
 
 	/**
-	 * Sync. information with the adjustable.
+	 * Sync information with the adjustable.
 	 * @param adjustableActor     The adjustable to manipulate with.
 	 * @param resource            The resource type.
 	 * @param bIsSell             <code>true</code> if the adjustable is for sell,
@@ -102,9 +111,8 @@ public class ResourceMarketActors extends Table {
 	 * @param game       The game object.
 	 * @param screen     The screen object.
 	 */
-	public ResourceMarketActors(final RoboticonQuest game, ResourceMarketScreen screen) {
+	public ResourceMarketActors(final RoboticonQuest game, ResourceMarketScreen screen, final MarketScreen marketScreen) {
 		center();
-
 		Skin skin = game.skin;
 		this.game = game;
 		this.screen = screen;
@@ -116,68 +124,67 @@ public class ResourceMarketActors extends Table {
 
 		playerStats = new Label("Your Resources\n\n\n\n\n", game.skin); //Pad out the initial string with new lines as the label width property does not correctly update
 		marketStats = new Label("", game.skin);
-		Label buyLabel  = new Label("Buy",  skin);
+		Label buyLabel = new Label("Buy", skin);
 		Label sellLabel = new Label("Sell", skin);
 
 		oreBuy = createAdjustable(ResourceType.ORE, false);
 		oreSell = createAdjustable(ResourceType.ORE, true);
 		energyBuy = createAdjustable(ResourceType.ENERGY, false);
 		energySell = createAdjustable(ResourceType.ENERGY, true);
+		foodBuy = createAdjustable(ResourceType.FOOD, false);
+		foodSell = createAdjustable(ResourceType.FOOD, true);
+
+		returnButton = new TextButton("Back to the Market Menu", skin);
+		returnButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				game.setScreen(marketScreen);
+			}
+		});
+
 
 		// Adjust properties.
 		phaseInfo.setAlignment(Align.right);
-		marketStats.setAlignment(Align.right);
+		marketStats.setAlignment(Align.center);
 
 		buyLabel.setAlignment(Align.center);
 		sellLabel.setAlignment(Align.center);
-		
+
 		playerStats.setAlignment(Align.center);
+		playerStats.setHeight(90);
+
+		//Create an inner table to make the layout surrounding it more manageable
+		Table innerTable = new Table();
+		{
+			innerTable.add(oreBuy).padRight(5);
+			innerTable.add(energyBuy);
+			innerTable.add(foodBuy).padLeft(5);
+			innerTable.row();
+			innerTable.add().height(30).colspan(3);
+			innerTable.row();
+			innerTable.add(oreSell).padRight(5);
+			innerTable.add(energySell);
+			innerTable.add(foodSell).padLeft(5);
+			innerTable.row();
+		}
 
 		// Add UI components to screen.
 		stage.addActor(phaseInfo);
-		stage.addActor(nextButton);
-		stage.addActor(playerStats);
 
-		// Setup UI Layout.
-		// Row: Player and Market Stats.
-		add().spaceRight(20);
+		add(playerStats);
+		row();
 		add(marketStats);
 		rowWithHeight(20);
 
-		// Row: Label of Sell and Buy
-		add(buyLabel);
-		add();
-		add(sellLabel);
-		rowWithHeight(10);
-
-		// Row: Ore buy/sell
-		add(oreBuy);
-		add();
-		add(oreSell);
-		rowWithHeight(10);
-
-		// Row: Energy buy/sell
-		add(energyBuy);
-		add();
-		add(energySell);
-		rowWithHeight(10);
+		add(innerTable);
+		row();
+		add().height(10);
+		row();
+		add(returnButton);
 
 		pad(20);
-		
-		bindEvents();
-		widgetUpdate();
-	}
 
-	/**
-	 * Bind button events.
-	 */
-	private void bindEvents() {
-		nextButton.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				game.nextPhase();
-			}
-		});
+		widgetUpdate();
 	}
 
 	/**
@@ -194,6 +201,7 @@ public class ResourceMarketActors extends Table {
 	 * Updates all widgets on screen
 	 */
 	public void widgetUpdate() {
+		this.center();
 		// update player stats, phase text, and the market stats.
 		String phaseText =
 				game.getPlayer().getName() + "; " +
@@ -205,7 +213,7 @@ public class ResourceMarketActors extends Table {
 				" Food: "   + game.getPlayer().getFood()   + "\n" +
 				" Money: "  + game.getPlayer().getMoney()  + "\n" ;
 
-		String marketStatText =
+		String marketStatText = "Market Resources -    " +
 				"Ore: " +    game.market.getResource(ResourceType.ORE   ) + "  " +
 				"Energy: " + game.market.getResource(ResourceType.ENERGY) + "  " +
 				"Food: " +   game.market.getResource(ResourceType.FOOD  );
@@ -236,9 +244,7 @@ public class ResourceMarketActors extends Table {
 		playerStats.setPosition(width / 2 - width / 8, height - playerStats.getHeight() - 20);
 		playerStats.setWidth(width / 4);
 
-		// Bottom Right
-		nextButton.setPosition(width - nextButton.getWidth() - 10, 10);
-
 		setWidth(width);
+		center();
 	}
 }

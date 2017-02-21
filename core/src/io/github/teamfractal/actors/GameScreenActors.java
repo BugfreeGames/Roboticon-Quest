@@ -1,14 +1,21 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	This class has been altered for assessment 3.
+		Cleaned up redundant code.
+		Changed Roboticons list to an ArrayList.
+		Removed restriction on purchasing a single plot of land per turn.
+		Added Food to plot status text.
+		Added capability of hiding/showing the next button
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -21,13 +28,14 @@ import io.github.teamfractal.screens.AbstractAnimationScreen;
 import io.github.teamfractal.screens.GameScreen;
 import io.github.teamfractal.util.TileConverter;
 
+import java.util.ArrayList;
+
 public class GameScreenActors {
 	private final Stage stage;
 	private RoboticonQuest game;
 	private GameScreen screen;
 	private Label phaseInfo;
 	private Label playerStats;
-	private Label winningPlayer;
 	private TextButton buyLandPlotBtn;
 	private TextButton installRoboticonBtn;
 	private TextButton installRoboticonBtnCancel;
@@ -35,7 +43,7 @@ public class GameScreenActors {
 	private SelectBox<String> installRoboticonSelect;
 	private Label plotStats;
 	private TextButton nextButton;
-	private boolean dropDownActive;
+
 	private boolean listUpdated;
 
 	/**
@@ -149,7 +157,6 @@ public class GameScreenActors {
 				plotStats.setVisible(false);
 				hideInstallRoboticon();
 				game.nextPhase();
-				dropDownActive = true;
 				installRoboticonSelect.setItems(game.getPlayer().getRoboticonAmountList());
 				textUpdate();
 			}
@@ -167,10 +174,10 @@ public class GameScreenActors {
 					LandPlot selectedPlot = screen.getSelectedPlot();
 					if (selectedPlot.getOwner() == game.getPlayer() && !selectedPlot.hasRoboticon()) {
 						Roboticon roboticon = null;
-						ResourceType type = ResourceType.Unknown;
+						ResourceType type;
 						int selection = installRoboticonSelect.getSelectedIndex();
 
-						Array<Roboticon> roboticons = game.getPlayer().getRoboticons();
+						ArrayList<Roboticon> roboticons = game.getPlayer().getRoboticons();
 						switch (selection) {
 							case 0:
 								type = ResourceType.ORE;
@@ -203,7 +210,6 @@ public class GameScreenActors {
 
 						hideInstallRoboticon();
 						updateRoboticonList();
-						dropDownActive = true;
 
 					} else listUpdated = false;
 				}
@@ -214,7 +220,6 @@ public class GameScreenActors {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				event.stop();
-				dropDownActive = false;
 				hideInstallRoboticon();
 			}
 		});
@@ -316,7 +321,8 @@ public class GameScreenActors {
 	public void showPlotStats(LandPlot plot, float x, float y) {
 		String plotStatText = "Ore: " + plot.getResource(ResourceType.ORE)
 				+ "  Energy: " + plot.getResource(ResourceType.ENERGY)
-				+ "  Food: " + plot.getResource(ResourceType.FOOD);
+				+ "  Food: " + plot.getResource(ResourceType.FOOD)
+				+ "\n" + plot.toString();
 
 		plotStats.setText(plotStatText);
 		plotStats.setPosition(x, y);

@@ -1,3 +1,10 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+    Changes made:
+    - Added support for food in the case statement.
+    - Added show/hide functionality to the Next button
+ */
+
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -213,7 +220,6 @@ public class GameScreen extends AbstractAnimationScreen implements Screen  {
 		case ENERGY:
 			return tiles.getTile(68 + game.getPlayerIndex(player) + 8);
 		case FOOD:
-			System.out.println("got food tile: " + tiles.getTile(68 + game.getPlayerIndex(player) + 12));
 			return tiles.getTile(68 + game.getPlayerIndex(player) + 12);
 		default:
 			return tiles.getTile(68 + game.getPlayerIndex(player) + 16);

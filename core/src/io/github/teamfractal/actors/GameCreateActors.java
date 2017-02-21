@@ -1,3 +1,7 @@
+/*
+    www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+    This class is new for assessment 3.
+ */
 package io.github.teamfractal.actors;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +17,12 @@ public class GameCreateActors extends Table {
 
     private Table playerTable = new Table();
 
+    /**
+     * The GameCreateActors
+     * Contains the elements of the interface for the game creation screen.
+     *
+     * @param game the game object containing the state of the game.
+     */
     public GameCreateActors(final RoboticonQuest game){
         this.game = game;
 
@@ -24,9 +34,11 @@ public class GameCreateActors extends Table {
         addPlayerBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                newPlayerNames.add(textField.getText());
-                textField.setText("");
-                UpdatePlayerTable();
+                if(newPlayerNames.size() < 4 && textField.getText().length() > 0) {
+                    newPlayerNames.add(textField.getText());
+                    textField.setText("");
+                    UpdatePlayerTable();
+                }
             }
         });
 
@@ -34,8 +46,10 @@ public class GameCreateActors extends Table {
         removePlayerBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                newPlayerNames.remove(newPlayerNames.size()-1);
-                UpdatePlayerTable();
+                if(!newPlayerNames.isEmpty()) {
+                    newPlayerNames.remove(newPlayerNames.size() - 1);
+                    UpdatePlayerTable();
+                }
             }
         });
 
@@ -64,11 +78,17 @@ public class GameCreateActors extends Table {
         nameEntryTable.add(removePlayerBtn);
         add(nameEntryTable);
         row();
+        add().height(30);
+        row();
 
         add(playerTable);
         add(confirmBtn);
     }
 
+    /**
+     * UpdatePlayerTable
+     * To change the elements of the playerTable to reflect changes in the newPlayerList.
+     */
     private void UpdatePlayerTable(){
         playerTable.clearChildren();
         playerTable.add(new Label("List of Players for the Game", this.game.skin));

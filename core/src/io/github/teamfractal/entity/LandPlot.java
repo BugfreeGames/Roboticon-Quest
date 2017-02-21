@@ -1,3 +1,9 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Removal of redundant methods.
+	- Replaced numeric literals with constants.
+ */
 package io.github.teamfractal.entity;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -7,6 +13,7 @@ import io.github.teamfractal.exception.NotCommonResourceException;
 import io.github.teamfractal.util.PlotManager;
 
 public class LandPlot {
+	private String name;
 	private TiledMapTileLayer.Cell mapTile;
 	private TiledMapTileLayer.Cell playerTile;
 	private TiledMapTileLayer.Cell roboticonTile;
@@ -16,12 +23,6 @@ public class LandPlot {
 	private final int ROBOTICON_SPECIALISED_YIELD_INCREASE_PERCENTAGE = 100;
 	
 	int x, y;
-
-
-	//<editor-fold desc="Class getters">
-	public TiledMapTileLayer.Cell getMapTile() {
-		return mapTile;
-	}
 
 	public TiledMapTileLayer.Cell getPlayerTile() {
 		return playerTile;
@@ -34,15 +35,6 @@ public class LandPlot {
 	public Player getOwner() {
 		return owner;
 	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
 
 	public boolean setOwner(Player player) {
 		if (hasOwner()) {
@@ -57,15 +49,6 @@ public class LandPlot {
 	public boolean hasOwner() {
 		return getOwner() != null;
 	}
-
-	public void removeOwner() {
-		if (!hasOwner())
-			return ;
-
-		owner.removeLandPlot(this);
-	}
-	
-	//</editor-fold>
 
 	private final int IndexOre = 0;
 	private final int IndexEnergy = 1;
@@ -82,8 +65,6 @@ public class LandPlot {
 	 * [ Ore, Energy, Food ]
 	 */
 	private int[] productionAmounts;
-	private boolean owned;
-	private Roboticon installedRoboticon;
 	private boolean hasRoboticon;
 
 	/**
@@ -95,15 +76,15 @@ public class LandPlot {
 	 */
 	public LandPlot(int ore, int energy, int food) {
 		this.productionAmounts = new int[]{ore, energy, food};
-		this.owned = false;
 	}
 
-	public void setupTile (PlotManager plotManager, int x, int y) {
+	public void setupTile (PlotManager plotManager, int x, int y, String tileName) {
 		this.x = x;
 		this.y = y;
 		this.mapTile = plotManager.getMapLayer().getCell(x, y);
 		this.playerTile = plotManager.getPlayerOverlay().getCell(x, y);
 		this.roboticonTile = plotManager.getRoboticonOverlay().getCell(x, y);
+		this.name = tileName;
 	}
 
 	/**
@@ -141,13 +122,11 @@ public class LandPlot {
 			int index = resourceTypeToIndex(roboticon.getCustomisation());
 			if (roboticon.setInstalledLandplot(this)) {
 				productionModifiers[index] += ROBOTICON_SPECIALISED_YIELD_INCREASE_PERCENTAGE;
-				this.installedRoboticon = roboticon;
 				return true;
 			}
 		}
 		else{
 			if (roboticon.setInstalledLandplot(this)) {
-				this.installedRoboticon = roboticon;
 				return true;
 			}
 		}
@@ -164,7 +143,8 @@ public class LandPlot {
 		int[] produced = new int[3];
 		for (int i = 0; i < 2; i++) {
 			int productionAmount = productionAmounts[i];
-			produced[i] = productionAmount + (int)((float)productionAmount * (float)(productionModifiers[i] / 100));
+
+			produced[i] = productionAmount + (int)((float)productionAmount * ((float)productionModifiers[i] / 100));
 		}
 		return produced;
 	}
@@ -183,7 +163,7 @@ public class LandPlot {
 
 	public int getResource(ResourceType resource) {
 		int resIndex = resourceTypeToIndex(resource);
-		return productionAmounts[resIndex];
+		return productionAmounts[resIndex] + productionModifiers[resIndex];
 	}
 	
 	public boolean hasRoboticon(){
@@ -194,5 +174,8 @@ public class LandPlot {
 		this.hasRoboticon = roboticonInstalled;
 	}
 
-
+	@Override
+	public String toString(){
+		return name;
+	}
 }

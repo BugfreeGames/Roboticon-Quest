@@ -1,8 +1,7 @@
 /*
     www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
-    This class is new for assessment 3.
+    This class is new for assessment 3
  */
-
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -11,23 +10,26 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.actors.GameCreateActors;
 
-public class GameCreateScreen implements Screen {
+import io.github.teamfractal.RoboticonQuest;
+import io.github.teamfractal.actors.RandomEventActors;
+import io.github.teamfractal.entity.RandomEvent;
+
+
+public class RandomEventScreen implements Screen {
     final RoboticonQuest game;
     final Stage stage;
     final Table table;
-    private GameCreateActors gameCreateActors;
+    private final RandomEventActors eventActors;
 
-    public GameCreateScreen(final RoboticonQuest game) {
+    public RandomEventScreen(final RoboticonQuest game, RandomEvent event) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         this.table = new Table();
         table.setFillParent(true);
-
-        this.gameCreateActors = new GameCreateActors(game);
-        table.center().center().add(gameCreateActors);
+        
+        eventActors = new RandomEventActors(game, this, event); // generates actors for the screen
+        table.add(eventActors);
         stage.addActor(table);
     }
 
@@ -57,15 +59,21 @@ public class GameCreateScreen implements Screen {
     @Override
     public void resume() {
 
+
     }
 
     @Override
     public void hide() {
+
 
     }
 
     @Override
     public void dispose() {
         stage.dispose();
+
+    }
+    public Stage getStage(){
+        return this.stage;
     }
 }

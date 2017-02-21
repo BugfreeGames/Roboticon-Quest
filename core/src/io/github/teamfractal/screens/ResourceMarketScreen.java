@@ -1,3 +1,9 @@
+/*
+	www-users.york.ac.uk/~jwa509/Ass3/RoboticonColony.jar
+	Changes made:
+	- Modified constructor to create a market screen.
+	- Added prepare() function.
+ */
 package io.github.teamfractal.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -8,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import io.github.teamfractal.RoboticonQuest;
-import io.github.teamfractal.actors.ResourceAuctionActors;
+import io.github.teamfractal.actors.AuctionActors;
 import io.github.teamfractal.actors.ResourceMarketActors;
 
 
@@ -17,21 +23,22 @@ public class ResourceMarketScreen implements Screen {
 	final Stage stage;
 	final Table table;
 	private final ResourceMarketActors marketActors;
-	private final ResourceAuctionActors auctionActors;
 	
-	
-	public ResourceMarketScreen(final RoboticonQuest game) {
+	public ResourceMarketScreen(final RoboticonQuest game, MarketScreen marketScreen) {
 		this.game = game;
 		this.stage = new Stage(new ScreenViewport());
 		this.table = new Table();
+		this.table.center();
 		table.setFillParent(true);
 
-		marketActors = new ResourceMarketActors(game, this); // generates actors for the screen
-		auctionActors = new ResourceAuctionActors(game, this, marketActors);
-		table.add(auctionActors); // positions actors
-		table.add(marketActors);
+		marketActors = new ResourceMarketActors(game, this, marketScreen); // generates actors for the screen
 
+		table.add(marketActors);
 		stage.addActor(table);
+	}
+
+	public void prepare(){
+		marketActors.widgetUpdate();
 	}
 
 	@Override
