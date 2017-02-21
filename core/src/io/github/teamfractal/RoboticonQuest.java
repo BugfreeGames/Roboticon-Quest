@@ -121,6 +121,14 @@ public class RoboticonQuest extends Game {
 		phase++;
 
 		switch (phase) {
+			//Phase 1: Purchase Tiles
+			case 1:
+			System.out.println("c1>?");
+
+			setScreen(gameScreen);
+			gameScreen.addAnimation(new AnimationShowPlayer(getPlayer().getName()));
+			break;
+			
 			// Phase 2: Purchase Roboticon
 			case 2:
 				RoboticonMarketScreen roboticonMarket = new RoboticonMarketScreen(this);
@@ -150,28 +158,29 @@ public class RoboticonQuest extends Game {
 			// Phase 5: Generate resource for player.
 			case 5:
 				setScreen(new MarketScreen(this));
-				// Restore the next buton on the game screen now that it isn't the current screen.
+				// Restore the next button on the game screen now that it isn't the current screen.
 				gameScreen.showNextButton();
 				break;
 
 			// End phase - Clean up and move to next player.
 			case 6:
+				System.out.println("RndEvents");
 				currentEvent = eventGenerator.chooseEvent();
 				if(currentEvent != null) {
-				currentEvent.activate(playerList.get(currentPlayer));
+					currentEvent.activate(playerList.get(currentPlayer));
 					RandomEventScreen screen = new RandomEventScreen(this, currentEvent);
 					setScreen(screen);
+				}
+				else{
+					nextPhase();
 				}
 				// Choose and implement random event for the new player
 				break;
 
 			case 7:
+				System.out.println("Mystcas7");
+
 				nextPlayer();
-			// Phase 1: Enable purchase of a LandPlot
-				break;
-			case 8:
-				setScreen(gameScreen);
-				gameScreen.addAnimation(new AnimationShowPlayer(getPlayer().getName()));
 				break;
 		}
 
@@ -231,7 +240,7 @@ public class RoboticonQuest extends Game {
 			if(isGameEnded()){
 				scoreScreen = new ScoreScreen(this);
 				setScreen(scoreScreen);
-				phase=9;
+				phase=8;
 			}
 			else {
 				//Close auction bids after every player has had the option to bid
