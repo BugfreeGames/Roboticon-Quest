@@ -55,4 +55,16 @@ public class LandPlotTest {
 		assertFalse(plot.installRoboticon(roboticon));
 		assertArrayEquals(new int[] {150, 50, 50}, plot.productionModifiers);
 	}
+	
+	@Test
+	public void testProduceResources() throws Exception {
+		Roboticon roboticon = new Roboticon(0);
+		roboticon.setCustomisation(ResourceType.ORE);
+		plot.installRoboticon(roboticon);
+		assertArrayEquals(new int[] {7, 0, 0}, plot.produceResources());
+		Roboticon roboticon2 = new Roboticon(0);
+		roboticon2.setCustomisation(ResourceType.ORE);
+		plot.installRoboticon(roboticon2);
+		assertArrayEquals(new int[] {12, 0, 0}, plot.produceResources());
+	}
 }

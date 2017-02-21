@@ -142,7 +142,9 @@ public class LandPlot {
 	public int[] produceResources() {
 		int[] produced = new int[3];
 		for (int i = 0; i < 2; i++) {
-			produced[i] = productionAmounts[i] + productionModifiers[i];
+			int productionAmount = productionAmounts[i];
+
+			produced[i] = productionAmount + (int)((float)productionAmount * ((float)productionModifiers[i] / 100));
 		}
 		return produced;
 	}

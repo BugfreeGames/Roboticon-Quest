@@ -5,6 +5,9 @@
 package io.github.teamfractal.util;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import io.github.teamfractal.Auction;
 import io.github.teamfractal.RoboticonQuest;
 import io.github.teamfractal.entity.Player;
@@ -62,7 +65,7 @@ public class AuctionableItemTest {
 	
 	@Test
 	public void testInit(){
-		assertEquals(new Array<Roboticon>(), player1.getRoboticons());
+		assertEquals(new ArrayList<Roboticon>(), player1.getRoboticons());
 		assertEquals(0, player2.getOre());
 		
 		try {
@@ -89,7 +92,7 @@ public class AuctionableItemTest {
 		auction.closeBidding();
 		
 		assertEquals(ORE_QUANTITY, player2.getOre());
-		assertEquals(1, player1.getRoboticons().size);
+		assertEquals(1, player1.getRoboticons().size());
 		assertEquals(PLAYER_DEFAULT_MONEY, player1.getMoney());
 		assertEquals(PLAYER_DEFAULT_MONEY, player2.getMoney());
 	}
